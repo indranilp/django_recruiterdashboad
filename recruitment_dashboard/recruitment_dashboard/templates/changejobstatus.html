@@ -1,0 +1,63 @@
+{% extends "base_template.html" %}
+{% block content %}
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+        
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">   
+<form id="contactform" method="post" enctype="multipart/form-data">
+{% csrf_token %}    
+ 
+<div class="form-group">
+<label for="FormControlTextarea1">Client Name</label>
+<select class="custom-select" name="clientname" id="clientname" onchange="return Call2();"style="text-align:right;" required="">
+<option value="">Select Client</option>
+{% for b in obj %}
+<option value="{{ b.clientname}}">{{ b.clientname}}</option>
+{% endfor %}
+</select>
+</div> 
+         
+<div class="form-group">    
+<label for="FormControlTextarea1">Position Name</label>    
+<select class="custom-select" name="positionname" id="positionname" onchange="return Call2();"style="text-align:right;" required="">
+<option value="">Select Position</option>
+{% for b in obj1 %}
+<option value="{{ b.positionname}}">{{ b.positionname}}</option>
+{% endfor %}
+</select>
+</div> 
+                
+<div class="form-group">    
+<label for="FormControlTextarea1">Job Status</label>    
+<select class="custom-select" name="jobstatus" id="jobstatus" onchange="return Call2();"style="text-align:right;" required="">
+<option value="">Select Status</option>
+
+<option value="open">open</option>
+<option value="closed">close</option>
+</select>
+</div>    
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form     
+          </ol>
+
+    
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Your Website 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+{% endblock content %} 

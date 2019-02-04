@@ -1,0 +1,54 @@
+
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+ 
+    <title>Recruited Dashboard - Login Page</title>
+    
+    <link rel="stylesheet" href="{% static 'css/signin.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+	<link rel="stylesheet" href="{% static 'css/bootstrap-theme.min.css' %}">
+	
+	<link rel="shortcut icon" href="{% static 'ico/favicon.ico' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{% static 'ico/apple-touch-icon-144-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{% static 'ico/apple-touch-icon-114-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="{% static 'ico/apple-touch-icon-72-precomposed.png' %}">
+    <link rel="apple-touch-icon-precomposed" href="{% static 'ico/apple-touch-icon-57-precomposed.png' %}">
+	
+
+	
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+  </head>
+
+  <body>
+  	 <div class="container">
+
+  	 	<div class="brand center-block">
+  			<h1>Recruitment Dashboard</h1>
+  			<hr>
+  			<h4>Sign in to continue to Recruitment Dashboard</h4>
+		</div>
+  	 	<form class="form-signin" role="form" method="POST">
+  	 		{% csrf_token %}
+  	 		<div class="well">
+				<div class="form-user-thumbs text-center">  	 		
+  	 				<span class="glyphicon glyphicon-user"></span>
+  	 			</div>
+        		<input name="username" type="text" class="form-control" placeholder="User name" required autofocus>
+        		<input name="password" type="password" class="form-control" placeholder="Password" required>
+        		<label class="checkbox">
+          			<input type="checkbox" value="remember-me"> Remember me
+        		</label>
+        		<button class="btn btn-lg btn-primary btn-block" type="submit" name="commit" value="Login">Sign in</button>
+        		<code>{{state}}</code>
+        	</div>
+      	</form>
+    </div>
+  </body>
+</html>
