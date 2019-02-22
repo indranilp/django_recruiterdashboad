@@ -11,28 +11,25 @@
 {% csrf_token %}    
  
 <div class="form-group">
-<label for="FormControlTextarea1">Client Name</label>
-<select class="custom-select" name="clientname" id="clientname" onchange="return Call2();"style="text-align:right;" required="">
-<option value="">Select Client</option>
+<label for="FormControlTextarea1">Vendor Name</label>
+<select class="custom-select" name="vendorname" id="vendorname" onchange="return Call2();"style="text-align:right;" required="">
+<option value="">Select Vendor</option>
 {% for b in obj %}
-<option value="{{ b.clientname}}">{{ b.clientname}}</option>
+<option value="{{ b.vendorname}}">{{ b.vendorname}}</option>
 {% endfor %}
 </select>
 </div> 
          
 <div class="form-group">    
-<label for="FormControlTextarea1">Position Name</label>    
-<select class="custom-select" name="positionname" id="positionname" onchange="return Call2();"style="text-align:right;" required="">
-<option value="">Select Position</option>
-{% for b in obj1 %}
-<option value="{{ b.positionname}}">{{ b.positionname}}</option>
-{% endfor %}
+<label for="FormControlTextarea1">Job Description</label>    
+<select class="custom-select" name="jobdescription" id="jobdescription" style="text-align:right;" required="">
+<option value="">Select Job Description</option>
 </select>
 </div> 
                 
 <div class="form-group">    
 <label for="FormControlTextarea1">Resource Name</label>    
-<select class="custom-select" name="username" id="username" onchange="return Call2();"style="text-align:right;" required="">
+<select class="custom-select" name="username" id="username" style="text-align:right;" required="">
 <option value="">Select Resource</option>
 {% for y in obj2 %}
 <option value="{{ y.username}}">{{ y.username}}</option>

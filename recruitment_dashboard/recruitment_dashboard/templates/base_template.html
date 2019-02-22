@@ -118,13 +118,17 @@
             <h6 class="dropdown-header">Action Screens:</h6>
             {% if currentuser == "admin" %} 
             <a class="dropdown-item" href="{% url "jobs.views.create_user" %}">Create User</a>
+            <a class="dropdown-item" href="{% url "jobs.views.add_vendor" %}">Add Vendor</a>
+            <a class="dropdown-item" href="{% url "jobs.views.add_skills" %}">Add Skills</a>
             <a class="dropdown-item" href="{% url "jobs.views.create_job" %}">Create Job</a>
             <a class="dropdown-item" href="{% url "jobs.views.assign_job" %}">Assign Job</a>
             <a class="dropdown-item" href="{% url "jobs.views.change_job_status" %}">Change Job Status</a>
             <a class="dropdown-item" href="{% url "jobs.views.generate_report" %}">Generate Report</a>
+            <a class="dropdown-item" href="{% url "jobs.views.search_resume" %}">Resume Database</a>
             {% else %}
-            <a class="dropdown-item" href="{% url "jobs.views.create_profile" %}">Create Profile</a>
-            <a class="dropdown-item" href="{% url "jobs.views.change_profile_status" %}">Change Profile Status</a>
+            <a class="dropdown-item" href="{% url "jobs.views.upload_resume" %}">Upload Resume</a>
+            <a class="dropdown-item" href="{% url "jobs.views.schedule_interview" %}">Schedule Interview</a>
+            <a class="dropdown-item" href="{% url "jobs.views.search_resume" %}">Resume Database</a>
             {% endif %}
         </li>
         <li class="nav-item">
@@ -216,11 +220,60 @@
       date_input.datepicker(options);
     })
 </script> 
+
+	<script>
+function Call2()
+	{
+		
+            
+			selectedval = document.getElementById("vendorname").value;
+            selectjobdescription = document.getElementById("jobdescription");
+            selectjobdescription.innerHTML = "";
+			{% for b in obj3 %}
+				 var json = "{{b.vendorname_id}}".replace(/&quot;/g,"\"")
+                 
+				 if(selectedval==json)
+				 {
+                        selectedval.innerHTML = "";
+                        // Populate list with options:
+ 
+                            
+                            var opt = "{{b.jobdescription}}".replace(/&quot;/g,"\"");
+                            
+                            
+                            
+                            var el = document.createElement("option");
+                                el.text = opt;
+                                el.value = opt;
+                                selectjobdescription.add(el);
+					
+				 }
+				 
+			{% endfor %}
+			return true;
+	
+	}
+	  </script>
+<script>      
+$(document).ready(function() {
+    $('#example').DataTable();
+} );
+</script>   
+
+
+
 <!--  jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/dataTables.bootstrap.min.js"></script>
+
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 
 <!-- Isolated Version of Bootstrap, not needed if your site already uses Bootstrap -->
 <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+
+
 
 <!-- Bootstrap Date-Picker Plugin -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>

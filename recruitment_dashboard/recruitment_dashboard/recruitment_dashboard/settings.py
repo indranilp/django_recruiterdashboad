@@ -25,7 +25,7 @@ SECRET_KEY = 's)4jxpl8qz2r=r^v6d*aiz(*3it(ufl)2fcq3n$(x%m459!7ab'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -124,7 +124,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
-   'D:/Freelance_work/recruitment_dashboard/static',
+   BASE_DIR + '/static',
     )
 
 TEMPLATES = [
@@ -147,3 +147,6 @@ TEMPLATES = [
 ]
 
 AUTH_USER_MODEL = 'jobs.Recruiter'
+
+MEDIA_ROOT = BASE_DIR + '/media/'
+MEDIA_URL = '/media/'

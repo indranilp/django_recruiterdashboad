@@ -6,24 +6,34 @@ from datetime import date
 class Recruiter(AbstractUser):
     emailid = models.EmailField(null=True,blank=True)
 
+class Vendor(models.Model):
+    vendorname=models.CharField(max_length=200,primary_key=True)
 
 class JobDetails(models.Model):
-    class Meta:
-        unique_together = (('clientname', 'positionname'),)
-    clientname=models.CharField(max_length=200,null=True,blank=True)
-    positionname  = models.CharField(max_length=200,null=True,blank=True)
+    jobid = models.IntegerField(primary_key=True)
+    vendorname=models.ForeignKey(Vendor, on_delete=models.CASCADE)
+    jobdescription = models.CharField(max_length=200, null=True, blank=True)
     jobstatus = models.CharField(max_length=200)
     jobcreatedate = models.DateField(default=date.today())
-    assignedto = models.CharField(max_length=50)
+    assignedto = models.CharField(max_length=200, null=True, blank=True)
 
-class ProfileDetails(models.Model):
-    class Meta:
-        unique_together = (('resourcename', 'resourcemail'),)
-    clientname=models.CharField(max_length=200,null=True,blank=True)
-    positionname  = models.CharField(max_length=200,null=True,blank=True)
-    resourcename = models.CharField(max_length=200,null=True,blank=True)
-    resourcemail = models.EmailField(null=True,blank=True)
-    uploaddate = models.DateField()
-    profilestatus = models.CharField(max_length=200,null=True,blank=True)
-    submittedby = models.CharField(max_length=200, null=True, blank=True)
+class TechnicalSkills(models.Model):
+    primaryskill = models.CharField(max_length=200,primary_key=True)
+
+class Resume(models.Model):
+    candidateemail = models.EmailField(primary_key=True)
+    resume = models.FileField(upload_to='documents/')
+    candidatename = models.CharField(max_length=200,null=True,blank=True)
+    primaryskill = models.ForeignKey(TechnicalSkills, on_delete=models.CASCADE)
+    submittedby = models.ForeignKey(Recruiter, on_delete=models.CASCADE)
+    uploaddate = models.DateField(default=date.today())
+    resumestatus = models.CharField(max_length=200, null=True, blank=True)
+
+class Interview(models.Model):
+    interviewid = models.IntegerField(primary_key=True)
+    jobid = models.ForeignKey(JobDetails, on_delete=models.CASCADE)
+    candidateemail = models.ForeignKey(Resume, on_delete=models.CASCADE)
+    interviewdate   = models.DateField()
+    interviewstatus = models.CharField(max_length=200,null=True,blank=True)
+
 

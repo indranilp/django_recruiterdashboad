@@ -5,29 +5,33 @@ The `urlpatterns` list routes URLs to views. For more information please see:
 Examples:
 Function views
     1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home')
+    2. Add a URL to urlpatterns:  url(r'^$', views.home, name='home)
 Class-based views
     1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home')
+    2. Add a URL to urlpatterns:  url(r'^$', Home.as_view(), name='home)
 Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
-    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
+    2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls))
 """
 from django.conf.urls import url
 from django.contrib import admin
+from jobs import views
 
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', 'jobs.views.login_main'),
-    url(r'^adminhome/$', 'jobs.views.admin_home'),
-    url(r'^userhome/$', 'jobs.views.user_home'),
-    url(r'^createuser/$', 'jobs.views.create_user'),
-    url(r'^createjob/$', 'jobs.views.create_job'),
-    url(r'^assignjob/$', 'jobs.views.assign_job'),
-    url(r'^changejobstatus/$', 'jobs.views.change_job_status'),
-    url(r'^generatereport/$', 'jobs.views.generate_report'),
-    url(r'^createprofile/$', 'jobs.views.create_profile'),
-    url(r'^changeprofilestatus/$', 'jobs.views.change_profile_status'),
+    url(r'^$', views.login_main),
+    url(r'^adminhome/$', views.admin_home),
+    url(r'^userhome/$', views.user_home),
+    url(r'^createuser/$', views.create_user),
+    url(r'^addvendor/$', views.add_vendor),
+    url(r'^addskill/$', views.add_skills),
+    url(r'^createjob/$', views.create_job),
+    url(r'^assignjob/$', views.assign_job),
+    url(r'^changejobstatus/$', views.change_job_status),
+    url(r'^generatereport/$', views.generate_report),
+    url(r'^uploadresume/$', views.upload_resume),
+    url(r'^scheduleinterview/$', views.schedule_interview),
+    url(r'^searchresume/$', views.search_resume),
 
 ]

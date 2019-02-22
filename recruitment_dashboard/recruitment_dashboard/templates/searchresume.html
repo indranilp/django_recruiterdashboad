@@ -1,0 +1,70 @@
+{% extends "base_template.html" %}
+{% block content %}
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+        
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">   
+<form id="contactform" method="post" enctype="multipart/form-data">
+{% csrf_token %}    
+
+</form     
+          </ol>
+
+    
+        </div>
+        <!-- /.container-fluid -->
+<table id="example" class="table table-striped table-bordered" style="width:100%">
+  <thead>
+    <tr>
+      <th class="th-sm">Name
+
+      </th>
+      <th class="th-sm">Email
+
+      </th>
+      <th class="th-sm">Primary Skill
+
+      </th>
+      <th class="th-sm">Submitted By
+
+      </th>
+      <th class="th-sm">Upload Date
+
+      </th>
+      <th class="th-sm">Resume Status
+
+      </th>
+    <th class="th-sm">Resume
+
+      </th>      
+    </tr>
+  </thead>
+  <tbody>
+{% for b in obj %}  
+    <tr>
+      <td>{{b.candidatename}}</td>
+      <td>{{b.candidateemail}}</td>
+      <td>{{b.primaryskill}}</td>
+      <td>{{b.submittedby}}</td>
+      <td>{{b.uploaddate}}</td>
+      <td>{{b.resumestatus}}</td>
+      <td>{{b.resume}}</td>
+    </tr>
+ {% endfor %}  
+  </tbody>
+</table>
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Your Website 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+{% endblock content %}        

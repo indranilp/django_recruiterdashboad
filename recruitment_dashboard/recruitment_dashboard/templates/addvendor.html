@@ -9,19 +9,10 @@
           <ol class="breadcrumb">   
 <form id="contactform" method="post" enctype="multipart/form-data">
 {% csrf_token %}    
-<div class="form-group">
-<label for="FormControlTextarea1">Vendor Name</label>
-<select class="custom-select" name="vendorname" id="vendorname" onchange="return Call2();"style="text-align:right;" required="">
-<option value="">Select Vendor</option>
-{% for b in obj %}
-<option value="{{ b.vendorname}}">{{ b.vendorname}}</option>
-{% endfor %}
-</select>
-</div> 
   <div class="form-group">
-    <label for="FormControlTextarea1">Job Description</label>
-    <input type="text" class="form-control" id="jobdescription"  name="jobdescription">
-  </div> 
+    <label for="FormControlTextarea1">Vendor Name</label>
+    <input type="text" class="form-control" id="vendorname"  name="vendorname">
+  </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form     
           </ol>

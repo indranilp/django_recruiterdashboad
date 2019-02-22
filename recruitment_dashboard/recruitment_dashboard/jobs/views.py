@@ -41,15 +41,15 @@ def login_main(request):
 
 def admin_home(request):
     currentuser = request.session.get('name1')
-    openjobcount = JobDetails.objects.filter(jobstatus='open').filter(jobcreatedate=current_date).count()
-    assignjobcount = JobDetails.objects.filter(jobstatus='assigned').filter(jobcreatedate=current_date).count()
-    closejobcount = JobDetails.objects.filter(jobstatus='closed').filter(jobcreatedate=current_date).count()
-    assignjobcount = JobDetails.objects.filter(jobstatus='assigned').filter(jobcreatedate=current_date).count()
-    submitcount = ProfileDetails.objects.filter(profilestatus="submitted").filter(uploaddate=current_date).count()
-    screencount = ProfileDetails.objects.filter(profilestatus="screened").filter(uploaddate=current_date).count()
-    selectcount = ProfileDetails.objects.filter(profilestatus="selected").filter(uploaddate=current_date).count()
+    openjobcount = JobDetails.objects.filter(jobstatus='open').count()
+    assignjobcount = JobDetails.objects.filter(jobstatus='assigned').count()
+    closejobcount = JobDetails.objects.filter(jobstatus='closed').count()
 
-    submit_group1 = ProfileDetails.objects.all().filter(profilestatus="submitted").values('submittedby').annotate(
+    submitcount = Resume.objects.filter(resumestatus="submitted").count()
+    screencount = Interview.objects.filter(interviewstatus="screened").count()
+    selectcount = Interview.objects.filter(interviewstatus="selected").count()
+
+    '''submit_group1 = ProfileDetails.objects.all().filter(profilestatus="submitted").values('submittedby').annotate(
         total=Count('submittedby'))
     result1=[]
     for item in submit_group1:
@@ -87,9 +87,9 @@ def admin_home(request):
     for r in result3:
         pie_chart.add(r[1], [{'value': r[0], 'label': r[1]}])
     pie_chart.value_formatter = lambda x: "%.15f" % x
-    chart_pie3 = pie_chart.render(is_unicode=True)
+    chart_pie3 = pie_chart.render(is_unicode=True)'''
 
-    return render_to_response('adminhome.html',{'currentuser': currentuser,'chart_pie1':chart_pie1,'chart_pie2':chart_pie2,'chart_pie3':chart_pie3,'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount},
+    return render_to_response('adminhome.html',{'currentuser': currentuser,'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount},
                               context_instance=RequestContext(request))
 
 def user_home(request):
@@ -98,10 +98,10 @@ def user_home(request):
     assignjobcount = JobDetails.objects.filter(assignedto=currentuser).filter(jobstatus='assigned').filter(jobcreatedate=current_date).count()
     closejobcount = JobDetails.objects.filter(assignedto=currentuser).filter(jobstatus='closed').filter(
         jobcreatedate=current_date).count()
-    submitcount = ProfileDetails.objects.filter(submittedby=currentuser).filter(profilestatus="submitted").filter(uploaddate=current_date).count()
+    '''submitcount = ProfileDetails.objects.filter(submittedby=currentuser).filter(profilestatus="submitted").filter(uploaddate=current_date).count()
     screencount = ProfileDetails.objects.filter(submittedby=currentuser).filter(profilestatus="screened").filter(uploaddate=current_date).count()
-    selectcount = ProfileDetails.objects.filter(submittedby=currentuser).filter(profilestatus="selected").filter(uploaddate=current_date).count()
-    return render_to_response('userhome.html',{'currentuser': currentuser,'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount},
+    selectcount = ProfileDetails.objects.filter(submittedby=currentuser).filter(profilestatus="selected").filter(uploaddate=current_date).count()'''
+    return render_to_response('userhome.html',{'currentuser': currentuser,'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount},
                               context_instance=RequestContext(request))
 
 def generate_report(request):
@@ -155,88 +155,130 @@ def create_user(request):
                                       context_instance=RequestContext(request))
     return render_to_response ('createuser.html',{'currentuser': currentuser},context_instance=RequestContext(request))
 
+def add_vendor(request):
+    currentuser = request.session.get('name1')
+    if request.POST:
+        try :
+                vendorname = request.POST.get('vendorname')
+                Vendor.objects.create(vendorname=vendorname)
+                return render_to_response('success.html',{'currentuser': currentuser,'success': "Vendor created successfully"},
+                                      context_instance=RequestContext(request))
+        except Exception as error:
+            return render_to_response('error.html',{'currentuser': currentuser,'error': error},
+                                      context_instance=RequestContext(request))
+    return render_to_response ('addvendor.html',{'currentuser': currentuser},context_instance=RequestContext(request))
+
+def add_skills(request):
+    currentuser = request.session.get('name1')
+    if request.POST:
+        try :
+                skillname = request.POST.get('skillname')
+                TechnicalSkills.objects.create(primaryskill=skillname)
+                return render_to_response('success.html',{'currentuser': currentuser,'success': "Skills added successfully"},
+                                      context_instance=RequestContext(request))
+        except Exception as error:
+            return render_to_response('error.html',{'currentuser': currentuser,'error': error},
+                                      context_instance=RequestContext(request))
+    return render_to_response ('addskill.html',{'currentuser': currentuser},context_instance=RequestContext(request))
 
 def create_job(request):
     currentuser = request.session.get('name1')
     if request.POST:
         try :
-                clientname = request.POST.get('clientname')
-                positionname = request.POST.get('positionname')
-                JobDetails.objects.create(clientname=clientname,positionname=positionname,jobstatus='open',assignedto='none',jobcreatedate=date.today())
+                vendorname = request.POST.get('vendorname')
+                jobdescription = request.POST.get('jobdescription')
+                vendorobj = Vendor.objects.get(vendorname=vendorname)
+                JobDetails.objects.create(vendorname=vendorobj,jobdescription=jobdescription,jobstatus='open',assignedto='none',jobcreatedate=date.today())
                 return render_to_response('success.html',{'currentuser': currentuser,'success': "Job created successfully"},
                                       context_instance=RequestContext(request))
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('createjob.html',{'currentuser': currentuser},context_instance=RequestContext(request))
+    return render_to_response ('createjob.html',{'currentuser': currentuser,'obj':Vendor.objects.all()},context_instance=RequestContext(request))
 
 def assign_job(request):
     currentuser = request.session.get('name1')
     if request.POST:
         try :
-                clientname = request.POST.get('clientname')
-                positionname = request.POST.get('positionname')
+                vendorname = request.POST.get('vendorname')
+                jobdescription = request.POST.get('jobdescription')
                 username = request.POST.get('username')
-                res1=JobDetails.objects.filter(clientname=clientname).filter(positionname=positionname).update(jobstatus='assigned')
-                print(clientname,positionname,username)
-                print(res1)
-                JobDetails.objects.filter(clientname=clientname).filter(positionname=positionname).update(
+                print(vendorname,jobdescription,username)
+                vendorobj = Vendor.objects.get(vendorname=vendorname)
+                res1=JobDetails.objects.filter(vendorname_id=vendorname).filter(jobdescription=jobdescription).update(jobstatus='assigned')
+                JobDetails.objects.filter(vendorname_id=vendorname).filter(jobdescription=jobdescription).update(
                     assignedto=username)
-                return render_to_response('success.html',{'currentuser': currentuser,'success': "Job assigned successfully to recruiter " + username},
+                return render_to_response('success.html',{'currentuser': currentuser,'success': "Job assigned successfully to Recruiter " + username},
                                       context_instance=RequestContext(request))
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'error': error},
                                       context_instance=RequestContext(request))
-    print()
-    return render_to_response ('assignjob.html',{'currentuser': currentuser,'obj':JobDetails.objects.filter(jobstatus='open').values('clientname').distinct(),'obj1':JobDetails.objects.filter(jobstatus='open').values('positionname').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin')},context_instance=RequestContext(request))
+    return render_to_response ('assignjob.html',{'currentuser': currentuser,'obj':JobDetails.objects.filter(jobstatus='open').values('vendorname').distinct(),'obj1':JobDetails.objects.filter(jobstatus='open').values('jobdescription').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all().filter(jobstatus='open')},context_instance=RequestContext(request))
 
 def change_job_status(request):
     currentuser = request.session.get('name1')
     if request.POST:
         try :
-                clientname = request.POST.get('clientname')
-                positionname = request.POST.get('positionname')
+                vendorname = request.POST.get('vendorname')
+                jobdescription = request.POST.get('jobdescription')
                 jobstatus = request.POST.get('jobstatus')
-                print(clientname,positionname,jobstatus)
-                result=JobDetails.objects.filter(clientname=clientname).filter(positionname=positionname).update(jobstatus=jobstatus)
+                print(vendorname,jobdescription,jobstatus)
+                result=JobDetails.objects.filter(vendorname_id=vendorname).filter(jobdescription=jobdescription).update(jobstatus=jobstatus)
                 print(result)
                 return render_to_response('success.html',{'currentuser': currentuser,'success': "Job status changed successfully to  " + jobstatus},
                                       context_instance=RequestContext(request))
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('changejobstatus.html',{'currentuser': currentuser,'obj':JobDetails.objects.values('clientname').distinct(),'obj1':JobDetails.objects.values('positionname').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin')},context_instance=RequestContext(request))
+    return render_to_response ('changejobstatus.html',{'currentuser': currentuser,'obj':JobDetails.objects.values('vendorname').distinct(),'obj1':JobDetails.objects.values('jobdescription').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all()},context_instance=RequestContext(request))
 
-def create_profile(request):
+def upload_resume(request):
     currentuser = request.session.get('name1')
     if request.POST:
         try :
-                clientname = request.POST.get('clientname')
-                positionname = request.POST.get('positionname')
-                resourcename = request.POST.get('resourcename')
-                resourcemail = request.POST.get('resourcemail')
-
-                ProfileDetails.objects.create(clientname=clientname,positionname=positionname,resourcename=resourcename,resourcemail=resourcemail,uploaddate=date.today(),profilestatus="submitted",submittedby=currentuser)
-                return render_to_response('success.html',{'currentuser': currentuser,'success': "Profile created successfully"},
+                candidateemail = request.POST.get('candidateemail')
+                candidatename = request.POST.get('candidatename')
+                skillname = request.POST.get('skillname')
+                #resume = request.POST.get('inputGroupFile01')
+                recruiterobj = Recruiter.objects.get(username=currentuser)
+                skillobj=TechnicalSkills.objects.get(primaryskill=skillname)
+                Resume.objects.create(candidateemail=candidateemail,candidatename=candidatename,primaryskill=skillobj,resume=request.FILES['inputGroupFile01'],uploaddate=date.today(),resumestatus="submitted",submittedby=recruiterobj)
+                return render_to_response('success.html',{'currentuser': currentuser,'success': "Resume uploaded successfully"},
                                       context_instance=RequestContext(request))
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('createprofile.html',{'currentuser': currentuser,'obj':JobDetails.objects.filter(jobstatus='assigned').filter(assignedto=currentuser).values('clientname').distinct(),'obj1':JobDetails.objects.filter(jobstatus='assigned').filter(assignedto=currentuser).values('positionname').distinct()},context_instance=RequestContext(request))
+    return render_to_response ('uploadresume.html',{'currentuser': currentuser,'obj':TechnicalSkills.objects.all()},context_instance=RequestContext(request))
 
-def change_profile_status(request):
+def schedule_interview(request):
     currentuser = request.session.get('name1')
     if request.POST:
         try :
-                clientname = request.POST.get('clientname')
-                positionname = request.POST.get('positionname')
-                resourcename = request.POST.get('resourcename')
-                profilestatus = request.POST.get('profilestatus')
-                result=ProfileDetails.objects.filter(clientname=clientname).filter(positionname=positionname).filter(resourcename=resourcename).update(profilestatus=profilestatus)
-                print(result)
-                return render_to_response('success.html',{'currentuser': currentuser,'success': "Profile status for " + resourcename + " changed to " + profilestatus},
+                jobdescription = request.POST.get('jobdescription')
+                vendorname = request.POST.get('vendorname')
+                candidateemail = request.POST.get('candidateemail')                
+                interviewdate = request.POST.get('startdate')
+                temp_date=datetime.strptime(interviewdate, "%m/%d/%Y").date()
+                interviewstatus = request.POST.get('interviewstatus')
+                resumeobj = Resume.objects.get(candidateemail=candidateemail)
+                jobobj = JobDetails.objects.get(vendorname=vendorname,jobdescription=jobdescription)                
+                Interview.objects.create(jobid=jobobj,candidateemail=resumeobj,interviewdate=temp_date,interviewstatus=interviewstatus)
+                return render_to_response('success.html',{'currentuser': currentuser,'success': "Interview scheduled for " + candidateemail},
                                       context_instance=RequestContext(request))
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('changeprofilestatus.html',{'currentuser': currentuser,'obj':JobDetails.objects.filter(jobstatus='assigned').filter(assignedto=currentuser).values('clientname').distinct(),'obj1':JobDetails.objects.filter(jobstatus='assigned').filter(assignedto=currentuser).values('positionname').distinct(),'obj2':ProfileDetails.objects.exclude(profilestatus="selected").filter(submittedby=currentuser).values('resourcename').distinct()},context_instance=RequestContext(request))
+    '''return render_to_response('uploadresume.html', {'currentuser': currentuser,
+                                                    'obj': JobDetails.objects.filter(jobstatus='assigned').filter(
+                                                        assignedto=currentuser).values('clientname').distinct(),
+                                                    'obj1': JobDetails.objects.filter(jobstatus='assigned').filter(
+                                                        assignedto=currentuser).values('positionname').distinct()},
+                              context_instance=RequestContext(request))'''
+
+    return render_to_response ('scheduleinterview.html',{'currentuser': currentuser,'obj2':Resume.objects.all(),'obj3':JobDetails.objects.all().filter(assignedto=currentuser)},context_instance=RequestContext(request))
+
+
+def search_resume(request):
+    currentuser = request.session.get('name1')
+    return render_to_response('searchresume.html', {'currentuser': currentuser, 'obj': Resume.objects.all()},
+                              context_instance=RequestContext(request))
