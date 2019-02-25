@@ -282,3 +282,12 @@ def search_resume(request):
     currentuser = request.session.get('name1')
     return render_to_response('searchresume.html', {'currentuser': currentuser, 'obj': Resume.objects.all()},
                               context_instance=RequestContext(request))
+
+def requirement_open(request):
+    submitcount = Resume.objects.filter(resumestatus="submitted").count()
+    screencount = Interview.objects.filter(interviewstatus="screened").count()
+    selectcount = Interview.objects.filter(interviewstatus="selected").count()
+    rejectcount = Interview.objects.filter(interviewstatus="rejected").count()    
+    currentuser = request.session.get('name1')
+    return render_to_response('requirementopen.html', {'currentuser': currentuser, 'obj': Interview.objects.all().exclude(jobid__jobstatus='closed'),'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount},
+                              context_instance=RequestContext(request))    

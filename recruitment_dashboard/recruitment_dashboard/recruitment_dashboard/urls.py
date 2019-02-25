@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^assignjob/$', views.assign_job),
     url(r'^changejobstatus/$', views.change_job_status),
     url(r'^generatereport/$', views.generate_report),
+    url(r'^requirementopen/$', views.requirement_open),
     url(r'^uploadresume/$', views.upload_resume),
     url(r'^scheduleinterview/$', views.schedule_interview),
     url(r'^searchresume/$', views.search_resume),
