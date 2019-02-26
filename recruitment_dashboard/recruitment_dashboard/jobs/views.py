@@ -9,6 +9,7 @@ from datetime import date
 from datetime import datetime
 import pygal
 from django.db.models import Count
+from django.db import connection, transaction
 
 current_date = date.today()
 current_month = datetime.now().month
@@ -46,8 +47,9 @@ def admin_home(request):
     closejobcount = JobDetails.objects.filter(jobstatus='closed').count()
 
     submitcount = Resume.objects.filter(resumestatus="submitted").count()
-    screencount = Interview.objects.filter(interviewstatus="screened").count()
+    screencount = Interview.objects.exclude(interviewstatus="selected").exclude(interviewstatus="rejected").count()
     selectcount = Interview.objects.filter(interviewstatus="selected").count()
+    rejectcount = Interview.objects.filter(interviewstatus="rejected").count()
 
     '''submit_group1 = ProfileDetails.objects.all().filter(profilestatus="submitted").values('submittedby').annotate(
         total=Count('submittedby'))
@@ -89,7 +91,7 @@ def admin_home(request):
     pie_chart.value_formatter = lambda x: "%.15f" % x
     chart_pie3 = pie_chart.render(is_unicode=True)'''
 
-    return render_to_response('adminhome.html',{'currentuser': currentuser,'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount},
+    return render_to_response('adminhome.html',{'currentuser': currentuser,'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount},
                               context_instance=RequestContext(request))
 
 def user_home(request):
@@ -285,9 +287,73 @@ def search_resume(request):
 
 def requirement_open(request):
     submitcount = Resume.objects.filter(resumestatus="submitted").count()
-    screencount = Interview.objects.filter(interviewstatus="screened").count()
+    screencount = Interview.objects.exclude(interviewstatus="selected").exclude(interviewstatus="rejected").count()
     selectcount = Interview.objects.filter(interviewstatus="selected").count()
     rejectcount = Interview.objects.filter(interviewstatus="rejected").count()    
     currentuser = request.session.get('name1')
-    return render_to_response('requirementopen.html', {'currentuser': currentuser, 'obj': Interview.objects.all().exclude(jobid__jobstatus='closed'),'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount},
+    
+    cursor = connection.cursor()
+
+    cursor.execute('''SELECT count("jobs_interview"."interviewstatus"), "jobs_interview"."interviewstatus","jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobdescription", "jobs_jobdetails"."jobstatus", "jobs_jobdetails"."jobcreatedate", "jobs_jobdetails"."assignedto" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobdescription","jobs_interview"."interviewstatus"''')
+    rows = cursor.fetchall()
+    final_dict={}
+
+    final_dict1={}
+
+    bdm_dict={}
+    for item in rows:
+       if item[4] != 'closed' :
+            key = (item[2],item[3])
+            if key not in final_dict:
+                final_dict[key]=[item[6],item[5],0,0,0,0]            
+            if item[1] == 'None' :
+                final_dict[key][2] = item[0]
+            if item[1] == 'round1' or item[1] == 'round2':
+                final_dict[key][3] += item[0]                
+            if item[1] == 'selected':
+                final_dict[key][4] = item[0]
+            if item[1] == 'rejected':
+                final_dict[key][5] = item[0]
+    for key in final_dict:
+        final_dict[key][2] = final_dict[key][3] + final_dict[key][4] + final_dict[key][5]
+
+
+
+    for item in rows:
+            key = (item[2],item[3])
+            if key not in final_dict1:
+                final_dict1[key]=[item[6],item[5],0,0,0,0]            
+            if item[1] == 'None' :
+                final_dict1[key][2] = item[0]
+            if item[1] == 'round1' or item[1] == 'round2':
+                final_dict1[key][3] += item[0]                
+            if item[1] == 'selected':
+                final_dict1[key][4] = item[0]
+            if item[1] == 'rejected':
+                final_dict1[key][5] = item[0]
+    for key in final_dict1:
+        final_dict1[key][2] = final_dict1[key][3] + final_dict1[key][4] + final_dict1[key][5]
+
+    for item in rows:
+        key = item[6]
+        if key not in bdm_dict:            
+            if item[4] != 'closed':
+                bdm_dict[key] = [1,0,0,0,0,1,0]
+            else:
+                bdm_dict[key] = [1,0,0,0,0,0,1]
+        else:
+            bdm_dict[key][0] += 1
+            if item[4] != 'closed':
+                bdm_dict[key][5] += 1  
+            else:
+                bdm_dict[key][6] += 1
+
+    for key in final_dict1:
+        bdm_dict[final_dict1[key][0]][1] =  final_dict1[key][2]
+        bdm_dict[final_dict1[key][0]][2] =  final_dict1[key][3]
+        bdm_dict[final_dict1[key][0]][3] =  final_dict1[key][4]
+        bdm_dict[final_dict1[key][0]][4] =  final_dict1[key][5]
+    print(final_dict)
+    print(bdm_dict)
+    return render_to_response('requirementopen.html', {'currentuser': currentuser, 'obj': Interview.objects.all().exclude(jobid__jobstatus='closed'),'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount,'objdict':final_dict,'bdm_dict':bdm_dict},
                               context_instance=RequestContext(request))    
