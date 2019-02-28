@@ -42,51 +42,18 @@
 
       <!-- Navbar Search -->
       <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-          <input type="text" class="form-control" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-          <div class="input-group-append">
-            <button class="btn btn-primary" type="button">
-              <i class="fas fa-search"></i>
-            </button>
-          </div>
-        </div>
+
       </form>
 
       <!-- Navbar -->
       <ul class="navbar-nav ml-auto ml-md-0">
-        <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-bell fa-fw"></i>
-            <span class="badge badge-danger">9+</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="alertsDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
-        <li class="nav-item dropdown no-arrow mx-1">
-          <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-envelope fa-fw"></i>
-            <span class="badge badge-danger">7</span>
-          </a>
-          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="messagesDropdown">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#">Something else here</a>
-          </div>
-        </li>
+        
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">Settings</a>
-            <a class="dropdown-item" href="#">Activity Log</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+            <a class="dropdown-item" href="#">Logout</a>                                    
           </div>
         </li>
       </ul>
@@ -109,38 +76,22 @@
             <span>Dashboard</span>
           </a>
         </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
-          </a>
-          <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <h6 class="dropdown-header">Action Screens:</h6>
+        <li class="nav-item">
             {% if currentuser == "admin" %} 
-            <a class="dropdown-item" href="{% url "jobs.views.create_user" %}">Create User</a>
-            <a class="dropdown-item" href="{% url "jobs.views.add_vendor" %}">Add Vendor</a>
-            <a class="dropdown-item" href="{% url "jobs.views.add_skills" %}">Add Skills</a>
-            <a class="dropdown-item" href="{% url "jobs.views.create_job" %}">Create Job</a>
-            <a class="dropdown-item" href="{% url "jobs.views.assign_job" %}">Assign Job</a>
-            <a class="dropdown-item" href="{% url "jobs.views.change_job_status" %}">Change Job Status</a>
-            <a class="dropdown-item" href="{% url "jobs.views.requirement_open" %}">Requirement Open</a>
-            <a class="dropdown-item" href="{% url "jobs.views.generate_report" %}">Generate Report</a>
-            <a class="dropdown-item" href="{% url "jobs.views.search_resume" %}">Resume Database</a>
+            <a class="nav-link" href="{% url "jobs.views.create_user" %}">Create User</a>
+            <a class="nav-link" href="{% url "jobs.views.add_vendor" %}">Add Vendor</a>
+            <a class="nav-link" href="{% url "jobs.views.add_skills" %}">Add Skills</a>
+            <a class="nav-link" href="{% url "jobs.views.create_job" %}">Create Job</a>
+            <a class="nav-link" href="{% url "jobs.views.assign_job" %}">Assign Job</a>
+            <a class="nav-link" href="{% url "jobs.views.change_job_status" %}">Change Job Status</a>
+            <a class="nav-link" href="{% url "jobs.views.generate_report" %}">Generate Report</a>
+            <a class="nav-link" href="{% url "jobs.views.generate_chart" %}">Generate Chart</a>
+            <a class="nav-link" href="{% url "jobs.views.search_resume" %}">Resume Database</a>
             {% else %}
-            <a class="dropdown-item" href="{% url "jobs.views.upload_resume" %}">Upload Resume</a>
-            <a class="dropdown-item" href="{% url "jobs.views.schedule_interview" %}">Schedule Interview</a>
-            <a class="dropdown-item" href="{% url "jobs.views.search_resume" %}">Resume Database</a>
+            <a class="nav-link" href="{% url "jobs.views.upload_resume" %}">Upload Resume</a>
+            <a class="nav-link" href="{% url "jobs.views.schedule_interview" %}">Schedule Interview</a>
+            <a class="nav-link" href="{% url "jobs.views.search_resume" %}">Resume Database</a>
             {% endif %}
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span></a>
         </li>
       </ul>
         
@@ -228,7 +179,7 @@ function Call2()
 		
             
 			selectedval = document.getElementById("vendorname").value;
-            selectjobdescription = document.getElementById("jobdescription");
+            selectjobdescription = document.getElementById("jobrole");
             selectjobdescription.innerHTML = "";
 			{% for b in obj3 %}
 				 var json = "{{b.vendorname_id}}".replace(/&quot;/g,"\"")
@@ -239,7 +190,7 @@ function Call2()
                         // Populate list with options:
  
                             
-                            var opt = "{{b.jobdescription}}".replace(/&quot;/g,"\"");
+                            var opt = "{{b.jobrole}}".replace(/&quot;/g,"\"");
                             
                             
                             

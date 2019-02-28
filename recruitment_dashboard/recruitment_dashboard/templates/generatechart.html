@@ -36,52 +36,26 @@ function drawChart() {
 }
 </script>
 
-
-   
-<div class="form-group">
-<label for="FormControlTextarea1">Vendor Name</label>
-<select class="custom-select" name="vendorname" id="vendorname" onchange="return Call2();"style="text-align:right;" required="">
-<option value="">Select Vendor</option>
-{% for b in obj3 %}
-<option value="{{ b.vendorname_id}}">{{ b.vendorname_id}}</option>
-{% endfor %}
-</select>
-</div> 
-         
-<div class="form-group">    
-<label for="FormControlTextarea1">Job Role</label>    
-<select class="custom-select" name="jobrole" id="jobrole" style="text-align:right;" required="">
-<option value="">Select Job Role</option>
-</select>
-</div> 
-                
-<div class="form-group">    
-<label for="FormControlTextarea1">Candidate Email</label>    
-<select class="custom-select" name="candidateemail" id="candidateemail" style="text-align:right;" required="">
-<option value="">Select Candidate</option>
-{% for y in obj2 %}
-<option value="{{ y.candidateemail}}">{{ y.candidateemail}}</option>
-{% endfor %}
-</select>
-</div>    
-
      <div class="form-group"> <!-- Date input -->
-        <label class="control-label" for="date">Interview Date</label>
+        <label class="control-label" for="date">Start Date</label>
         <input class="form-control" id="startdate" name="startdate" placeholder="MM/DD/YYY" type="text"/>
       </div>
       
-
+     <div class="form-group"> <!-- Date input -->
+        <label class="control-label" for="date">End Date</label>
+        <input class="form-control" id="enddate" name="enddate" placeholder="MM/DD/YYY" type="text"/>
+      </div>      
+   
 <div class="form-group">    
-<label for="FormControlTextarea1">Interview Round</label>    
-<select class="custom-select" name="interviewstatus" id="interviewstatus" style="text-align:right;" required="">
-<option value="">Select Round</option>
+<label for="FormControlTextarea1">Select Report Type</label>    
+<select class="custom-select" name="reporttype" id="reporttype" onchange="return Call2();"style="text-align:right;" required="">
+<option value="">Select Report Type</option>
 
-<option value="round1">round1</option>
-<option value="round2">round2</option>
-<option value="selected">selected</option>
-<option value="selected">rejected</option>
+<option value="daily">daily</option>
+<option value="weekly">weekly</option>
+<option value="monthly">monthly</option>
 </select>
-</div>    
+</div>     
 
   <button type="submit" class="btn btn-primary" >Submit</button>
   

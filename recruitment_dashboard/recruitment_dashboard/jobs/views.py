@@ -10,6 +10,7 @@ from datetime import datetime
 import pygal
 from django.db.models import Count
 from django.db import connection, transaction
+import pandas as pd
 
 current_date = date.today()
 current_month = datetime.now().month
@@ -106,7 +107,7 @@ def user_home(request):
     return render_to_response('userhome.html',{'currentuser': currentuser,'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount},
                               context_instance=RequestContext(request))
 
-def generate_report(request):
+def generate_chart(request):
     currentuser = request.session.get('name1')
     if request.POST:
 
@@ -127,16 +128,9 @@ def generate_report(request):
         line_chart.add('Others', [14.2, 15.4, 15.3, 8.9, 9, 10.4, 8.9, 5.8, 6.7, 6.8, 7.5])
         chart_line=line_chart.render(is_unicode=True)
 
-        openjobcount = JobDetails.objects.filter(jobstatus='open').filter(jobcreatedate=current_date).count()
-        assignjobcount = JobDetails.objects.filter(jobstatus='assigned').filter(jobcreatedate=current_date).count()
-        submitcount = ProfileDetails.objects.filter(profilestatus="submitted").filter(uploaddate=current_date).count()
-        screencount = ProfileDetails.objects.filter(profilestatus="screened").filter(uploaddate=current_date).count()
-        selectcount = ProfileDetails.objects.filter(profilestatus="selected").filter(uploaddate=current_date).count()
-        return render_to_response('generatereport.html', {'currentuser': currentuser, 'assignjobcount': assignjobcount,
-                                                          'openjobcount': openjobcount, 'submitcount': submitcount,
-                                                          'screencount': screencount, 'selectcount': selectcount,'bargraph':chart_line},
+        return render_to_response('generatechart.html', {'currentuser': currentuser, 'bargraph':chart_line},
                                   context_instance=RequestContext(request))
-    return render_to_response('generatereport.html',{'currentuser': currentuser},
+    return render_to_response('generatechart.html',{'currentuser': currentuser},
                               context_instance=RequestContext(request))
 
 def create_user(request):
@@ -188,9 +182,10 @@ def create_job(request):
     if request.POST:
         try :
                 vendorname = request.POST.get('vendorname')
+                jobrole = request.POST.get('jobrole')
                 jobdescription = request.POST.get('jobdescription')
                 vendorobj = Vendor.objects.get(vendorname=vendorname)
-                JobDetails.objects.create(vendorname=vendorobj,jobdescription=jobdescription,jobstatus='open',assignedto='none',jobcreatedate=date.today())
+                JobDetails.objects.create(vendorname=vendorobj,jobrole=jobrole,jobdescription=jobdescription,jobstatus='open',assignedto='none',jobcreatedate=date.today())
                 return render_to_response('success.html',{'currentuser': currentuser,'success': "Job created successfully"},
                                       context_instance=RequestContext(request))
         except Exception as error:
@@ -203,36 +198,36 @@ def assign_job(request):
     if request.POST:
         try :
                 vendorname = request.POST.get('vendorname')
-                jobdescription = request.POST.get('jobdescription')
+                jobrole = request.POST.get('jobrole')
                 username = request.POST.get('username')
-                print(vendorname,jobdescription,username)
+                print(vendorname,jobrole,username)
                 vendorobj = Vendor.objects.get(vendorname=vendorname)
-                res1=JobDetails.objects.filter(vendorname_id=vendorname).filter(jobdescription=jobdescription).update(jobstatus='assigned')
-                JobDetails.objects.filter(vendorname_id=vendorname).filter(jobdescription=jobdescription).update(
+                res1=JobDetails.objects.filter(vendorname_id=vendorname).filter(jobrole=jobrole).update(jobstatus='assigned')
+                JobDetails.objects.filter(vendorname_id=vendorname).filter(jobrole=jobrole).update(
                     assignedto=username)
                 return render_to_response('success.html',{'currentuser': currentuser,'success': "Job assigned successfully to Recruiter " + username},
                                       context_instance=RequestContext(request))
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('assignjob.html',{'currentuser': currentuser,'obj':JobDetails.objects.filter(jobstatus='open').values('vendorname').distinct(),'obj1':JobDetails.objects.filter(jobstatus='open').values('jobdescription').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all().filter(jobstatus='open')},context_instance=RequestContext(request))
+    return render_to_response ('assignjob.html',{'currentuser': currentuser,'obj':JobDetails.objects.filter(jobstatus='open').values('vendorname').distinct(),'obj1':JobDetails.objects.filter(jobstatus='open').values('jobrole').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all().filter(jobstatus='open')},context_instance=RequestContext(request))
 
 def change_job_status(request):
     currentuser = request.session.get('name1')
     if request.POST:
         try :
                 vendorname = request.POST.get('vendorname')
-                jobdescription = request.POST.get('jobdescription')
+                jobrole = request.POST.get('jobrole')
                 jobstatus = request.POST.get('jobstatus')
-                print(vendorname,jobdescription,jobstatus)
-                result=JobDetails.objects.filter(vendorname_id=vendorname).filter(jobdescription=jobdescription).update(jobstatus=jobstatus)
+                print(vendorname,jobrole,jobstatus)
+                result=JobDetails.objects.filter(vendorname_id=vendorname).filter(jobrole=jobrole).update(jobstatus=jobstatus)
                 print(result)
                 return render_to_response('success.html',{'currentuser': currentuser,'success': "Job status changed successfully to  " + jobstatus},
                                       context_instance=RequestContext(request))
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('changejobstatus.html',{'currentuser': currentuser,'obj':JobDetails.objects.values('vendorname').distinct(),'obj1':JobDetails.objects.values('jobdescription').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all()},context_instance=RequestContext(request))
+    return render_to_response ('changejobstatus.html',{'currentuser': currentuser,'obj':JobDetails.objects.values('vendorname').distinct(),'obj1':JobDetails.objects.values('jobrole').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all()},context_instance=RequestContext(request))
 
 def upload_resume(request):
     currentuser = request.session.get('name1')
@@ -256,14 +251,14 @@ def schedule_interview(request):
     currentuser = request.session.get('name1')
     if request.POST:
         try :
-                jobdescription = request.POST.get('jobdescription')
+                jobrole = request.POST.get('jobrole')
                 vendorname = request.POST.get('vendorname')
                 candidateemail = request.POST.get('candidateemail')                
                 interviewdate = request.POST.get('startdate')
                 temp_date=datetime.strptime(interviewdate, "%m/%d/%Y").date()
                 interviewstatus = request.POST.get('interviewstatus')
                 resumeobj = Resume.objects.get(candidateemail=candidateemail)
-                jobobj = JobDetails.objects.get(vendorname=vendorname,jobdescription=jobdescription)                
+                jobobj = JobDetails.objects.get(vendorname=vendorname,jobrole=jobrole)                
                 Interview.objects.create(jobid=jobobj,candidateemail=resumeobj,interviewdate=temp_date,interviewstatus=interviewstatus)
                 return render_to_response('success.html',{'currentuser': currentuser,'success': "Interview scheduled for " + candidateemail},
                                       context_instance=RequestContext(request))
@@ -285,75 +280,88 @@ def search_resume(request):
     return render_to_response('searchresume.html', {'currentuser': currentuser, 'obj': Resume.objects.all()},
                               context_instance=RequestContext(request))
 
-def requirement_open(request):
-    submitcount = Resume.objects.filter(resumestatus="submitted").count()
-    screencount = Interview.objects.exclude(interviewstatus="selected").exclude(interviewstatus="rejected").count()
-    selectcount = Interview.objects.filter(interviewstatus="selected").count()
-    rejectcount = Interview.objects.filter(interviewstatus="rejected").count()    
+def generate_report(request):
     currentuser = request.session.get('name1')
-    
-    cursor = connection.cursor()
+    if request.POST:
 
-    cursor.execute('''SELECT count("jobs_interview"."interviewstatus"), "jobs_interview"."interviewstatus","jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobdescription", "jobs_jobdetails"."jobstatus", "jobs_jobdetails"."jobcreatedate", "jobs_jobdetails"."assignedto" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobdescription","jobs_interview"."interviewstatus"''')
-    rows = cursor.fetchall()
-    final_dict={}
+        startdate = request.POST.get('startdate')
+        enddate = request.POST.get('enddate')
+        reporttype = request.POST.get('reporttype')
+        print(startdate,enddate,reporttype)
+        print(type(startdate))
+        
+                
+        cursor = connection.cursor()
 
-    final_dict1={}
+        cursor.execute('''SELECT count("jobs_interview"."interviewstatus"), "jobs_interview"."interviewstatus","jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole", "jobs_jobdetails"."jobstatus", "jobs_jobdetails"."jobcreatedate", "jobs_jobdetails"."assignedto" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole","jobs_interview"."interviewstatus"''')
+        rows = cursor.fetchall()
+        final_dict={}
 
-    bdm_dict={}
-    for item in rows:
-       if item[4] != 'closed' :
-            key = (item[2],item[3])
-            if key not in final_dict:
-                final_dict[key]=[item[6],item[5],0,0,0,0]            
-            if item[1] == 'None' :
-                final_dict[key][2] = item[0]
-            if item[1] == 'round1' or item[1] == 'round2':
-                final_dict[key][3] += item[0]                
-            if item[1] == 'selected':
-                final_dict[key][4] = item[0]
-            if item[1] == 'rejected':
-                final_dict[key][5] = item[0]
-    for key in final_dict:
-        final_dict[key][2] = final_dict[key][3] + final_dict[key][4] + final_dict[key][5]
+        final_dict1={}
+
+        bdm_dict={}
+        for item in rows:
+           if item[4] != 'closed' :
+                key = (item[2],item[3])
+                if key not in final_dict:
+                    final_dict[key]=[item[6],item[5],0,0,0,0]            
+                if item[1] == 'None' :
+                    final_dict[key][2] = item[0]
+                if item[1] == 'round1' or item[1] == 'round2':
+                    final_dict[key][3] += item[0]                
+                if item[1] == 'selected':
+                    final_dict[key][4] = item[0]
+                if item[1] == 'rejected':
+                    final_dict[key][5] = item[0]
+        for key in final_dict:
+            final_dict[key][2] = final_dict[key][3] + final_dict[key][4] + final_dict[key][5]
 
 
 
-    for item in rows:
-            key = (item[2],item[3])
-            if key not in final_dict1:
-                final_dict1[key]=[item[6],item[5],0,0,0,0]            
-            if item[1] == 'None' :
-                final_dict1[key][2] = item[0]
-            if item[1] == 'round1' or item[1] == 'round2':
-                final_dict1[key][3] += item[0]                
-            if item[1] == 'selected':
-                final_dict1[key][4] = item[0]
-            if item[1] == 'rejected':
-                final_dict1[key][5] = item[0]
-    for key in final_dict1:
-        final_dict1[key][2] = final_dict1[key][3] + final_dict1[key][4] + final_dict1[key][5]
-
-    for item in rows:
-        key = item[6]
-        if key not in bdm_dict:            
-            if item[4] != 'closed':
-                bdm_dict[key] = [1,0,0,0,0,1,0]
+        for item in rows:
+                key = (item[2],item[3])
+                if key not in final_dict1:
+                    final_dict1[key]=[item[6],item[5],0,0,0,0]            
+                if item[1] == 'None' :
+                    final_dict1[key][2] = item[0]
+                if item[1] == 'round1' or item[1] == 'round2':
+                    final_dict1[key][3] += item[0]                
+                if item[1] == 'selected':
+                    final_dict1[key][4] = item[0]
+                if item[1] == 'rejected':
+                    final_dict1[key][5] = item[0]
+        for key in final_dict1:
+            final_dict1[key][2] = final_dict1[key][3] + final_dict1[key][4] + final_dict1[key][5]
+        print(final_dict1.values())
+        columnnames = ['assign','date','source','screen','select','reject']
+        df = pd.DataFrame.from_dict(final_dict1.values())
+        df.columns = columnnames
+        df['date'] = pd.to_datetime(df['date'])
+        df.set_index(df["date"],inplace=True)
+        print(df)
+        df1=df.groupby('assign').resample('W').sum()
+        print(df1)
+        for item in rows:
+            key = item[6]
+            if key not in bdm_dict:            
+                if item[4] != 'closed':
+                    bdm_dict[key] = [1,0,0,0,0,1,0]
+                else:
+                    bdm_dict[key] = [1,0,0,0,0,0,1]
             else:
-                bdm_dict[key] = [1,0,0,0,0,0,1]
-        else:
-            bdm_dict[key][0] += 1
-            if item[4] != 'closed':
-                bdm_dict[key][5] += 1  
-            else:
-                bdm_dict[key][6] += 1
+                bdm_dict[key][0] += 1
+                if item[4] != 'closed':
+                    bdm_dict[key][5] += 1  
+                else:
+                    bdm_dict[key][6] += 1
 
-    for key in final_dict1:
-        bdm_dict[final_dict1[key][0]][1] =  final_dict1[key][2]
-        bdm_dict[final_dict1[key][0]][2] =  final_dict1[key][3]
-        bdm_dict[final_dict1[key][0]][3] =  final_dict1[key][4]
-        bdm_dict[final_dict1[key][0]][4] =  final_dict1[key][5]
-    print(final_dict)
-    print(bdm_dict)
-    return render_to_response('requirementopen.html', {'currentuser': currentuser, 'obj': Interview.objects.all().exclude(jobid__jobstatus='closed'),'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount,'objdict':final_dict,'bdm_dict':bdm_dict},
-                              context_instance=RequestContext(request))    
+        for key in final_dict1:
+            bdm_dict[final_dict1[key][0]][1] =  final_dict1[key][2]
+            bdm_dict[final_dict1[key][0]][2] =  final_dict1[key][3]
+            bdm_dict[final_dict1[key][0]][3] =  final_dict1[key][4]
+            bdm_dict[final_dict1[key][0]][4] =  final_dict1[key][5]
+        
+        return render_to_response('generatereport.html', {'currentuser': currentuser, 'objdict':final_dict,'bdm_dict':bdm_dict},
+                                  context_instance=RequestContext(request))    
+    return render_to_response('selectdate.html', {'currentuser': currentuser},
+                                  context_instance=RequestContext(request))        

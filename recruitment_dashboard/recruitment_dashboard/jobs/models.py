@@ -12,7 +12,8 @@ class Vendor(models.Model):
 class JobDetails(models.Model):
     jobid = models.IntegerField(primary_key=True)
     vendorname=models.ForeignKey(Vendor, on_delete=models.CASCADE)
-    jobdescription = models.CharField(max_length=200, null=True, blank=True)
+    jobrole = models.CharField(max_length=200, null=True, blank=True)
+    jobdescription = models.CharField(max_length=2000, null=True, blank=True)
     jobstatus = models.CharField(max_length=200)
     jobcreatedate = models.DateField(default=date.today())
     assignedto = models.CharField(max_length=200, null=True, blank=True)
