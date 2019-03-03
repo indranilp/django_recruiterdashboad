@@ -1,5 +1,6 @@
 {% extends "base_template.html" %}
 {% block content %}
+
       <div id="content-wrapper">
 
         <div class="container-fluid">
@@ -8,8 +9,8 @@
           <!-- Breadcrumbs-->
           <ol class="breadcrumb">   
 <form id="contactform" method="post" enctype="multipart/form-data">
-{% csrf_token %}    
-
+{% csrf_token %} 
+   
 </form     
           </ol>
 
@@ -48,64 +49,23 @@
     </tr>
   </thead>
   <tbody>
-{% for key, value in objdict.items %}  
+{% for value in objdict %}  
     <tr>
-      <td>{{key.0}}</td>
-      <td>{{key.1}}</td>
-      <td>{{value.1}}</td>
       <td>{{value.0}}</td>
-      <td>{{value.2}}</td>
-      <td>{{value.3}}</td>
-      <td>{{value.4}}</td>
-      <td>{{value.5}}</td>
-      <td>Open</td>
-    </tr>
- {% endfor %}  
-  </tbody>
-</table>
-
-<table id="example" class="table table-striped table-bordered" style="width:100%">
-  <thead>
-    <tr>
-      <th class="th-sm">BDM
-
-      </th>
-      <th class="th-sm">Jobs Worked On
-
-    
-      <th class="th-sm">Resume Sourced
-
-      </th>
-    <th class="th-sm">Interview Scheduled
-      </th>      
-      </th>
-    <th class="th-sm">Accepted
-      </th>         
-      </th>
-    <th class="th-sm">Rejected
-      </th>         
-      </th>
-    <th class="th-sm">Open Jobs
-      </th>         
-    <th class="th-sm">Close Jobs
-      </th>               
-    </tr>
-  </thead>
-  <tbody>
-{% for key, value in bdm_dict.items %}  
-    <tr>
-      <td>{{key}}</td>
       <td>{{value.1}}</td>
-      <td>{{value.0}}</td>
-      <td>{{value.2}}</td>
-      <td>{{value.3}}</td>
       <td>{{value.4}}</td>
+      <td>{{value.2}}</td>
       <td>{{value.5}}</td>
       <td>{{value.6}}</td>
+      <td>{{value.7}}</td>
+      <td>{{value.8}}</td>
+      <td>{{value.3}}</td>
     </tr>
  {% endfor %}  
   </tbody>
 </table>
+
+
         <!-- Sticky Footer -->
         <footer class="sticky-footer">
           <div class="container my-auto">
