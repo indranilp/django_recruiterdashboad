@@ -123,7 +123,7 @@ def admin_home(request):
     pie_chart.value_formatter = lambda x: "%.15f" % x
     chart_pie3 = pie_chart.render(is_unicode=True)'''
 
-    return render_to_response('adminhome.html',{'currentuser': currentuser,'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount},
+    return render_to_response('adminhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount},
                               context_instance=RequestContext(request))
 
 @login_required                              
@@ -136,7 +136,7 @@ def user_home(request):
     screencount = Interview.objects.filter(jobid__assignedto=currentuser).exclude(interviewstatus="selected").exclude(interviewstatus="rejected").count()
     selectcount = Interview.objects.filter(jobid__assignedto=currentuser).filter(interviewstatus="selected").count()
     rejectcount = Interview.objects.filter(jobid__assignedto=currentuser).filter(interviewstatus="rejected").count()
-    return render_to_response('userhome.html',{'currentuser': currentuser,'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount},
+    return render_to_response('userhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount},
                               context_instance=RequestContext(request))
 
 @login_required                              
@@ -348,9 +348,9 @@ def generate_chart(request):
             line_chart3.add(k,v)
         chart_line3=line_chart3.render(is_unicode=True)
         
-        return render_to_response('generatechart.html', {'currentuser': currentuser, 'bargraph':chart_line,'bargraph1':chart_line1,'bargraph2':chart_line2,'bargraph3':chart_line3,'bdm_dict':bdm_dict},
+        return render_to_response('generatechart.html', {'currentuser': currentuser, 'userobject':Recruiter.objects.get(username=currentuser),'bargraph':chart_line,'bargraph1':chart_line1,'bargraph2':chart_line2,'bargraph3':chart_line3,'bdm_dict':bdm_dict},
                                   context_instance=RequestContext(request))
-    return render_to_response('generatechart.html',{'currentuser': currentuser},
+    return render_to_response('generatechart.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser)},
                               context_instance=RequestContext(request))
 
 @login_required                              
@@ -361,16 +361,40 @@ def create_user(request):
                 user_name = request.POST.get('username')
                 email = request.POST.get('email')
                 password = request.POST.get('password')
-                rec =Recruiter.objects.create(username=user_name,email=email)
+                gender = request.POST.get('gender')
+                designation = request.POST.get('designation')
+                mobile = request.POST.get('mobile')
+                birthdate = request.POST.get('birthdate')                
+                temp_date=datetime.strptime(birthdate, "%m/%d/%Y").date()
+                rec =Recruiter.objects.create(username=user_name,email=email,gender=gender,designation=designation,birthdate=temp_date,mobile=mobile,picfile = request.FILES['pic'])
                 rec_id = Recruiter.objects.get(username=user_name)
                 rec_id.set_password(password)
                 rec_id.save()
-                return render_to_response('success.html',{'currentuser': currentuser,'success': "User created successfully"},
+                return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "User created successfully"},
                                       context_instance=RequestContext(request))
         except Exception as error:
-            return render_to_response('error.html',{'currentuser': currentuser,'error': error},
+            return render_to_response('error.html',{'currentuser': currentuser, 'userobject':Recruiter.objects.get(username=currentuser),'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('createuser.html',{'currentuser': currentuser},context_instance=RequestContext(request))
+    return render_to_response ('createuser.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser)},context_instance=RequestContext(request))
+    
+@login_required                              
+def edit_profile(request):
+    currentuser = request.session.get('name1')
+    if request.POST:
+        try :
+                user_name = request.POST.get('username')
+                email = request.POST.get('email')
+                password = request.POST.get('password')
+                rec =Recruiter.objects.create(username=user_name,email=email,gender=gender)
+                rec_id = Recruiter.objects.get(username=user_name)
+                rec_id.set_password(password)
+                rec_id.save()
+                return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "User created successfully"},
+                                      context_instance=RequestContext(request))
+        except Exception as error:
+            return render_to_response('error.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'error': error},
+                                      context_instance=RequestContext(request))
+    return render_to_response ('createuser.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser)},context_instance=RequestContext(request))    
 
 @login_required
 def add_vendor(request):
@@ -379,12 +403,12 @@ def add_vendor(request):
         try :
                 vendorname = request.POST.get('vendorname')
                 Vendor.objects.create(vendorname=vendorname)
-                return render_to_response('success.html',{'currentuser': currentuser,'success': "Vendor created successfully"},
+                return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Vendor created successfully"},
                                       context_instance=RequestContext(request))
         except Exception as error:
-            return render_to_response('error.html',{'currentuser': currentuser,'error': error},
+            return render_to_response('error.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('addvendor.html',{'currentuser': currentuser},context_instance=RequestContext(request))
+    return render_to_response ('addvendor.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser)},context_instance=RequestContext(request))
 
 @login_required    
 def add_skills(request):
@@ -393,12 +417,12 @@ def add_skills(request):
         try :
                 skillname = request.POST.get('skillname')
                 TechnicalSkills.objects.create(primaryskill=skillname)
-                return render_to_response('success.html',{'currentuser': currentuser,'success': "Skills added successfully"},
+                return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Skills added successfully"},
                                       context_instance=RequestContext(request))
         except Exception as error:
-            return render_to_response('error.html',{'currentuser': currentuser,'error': error},
+            return render_to_response('error.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('addskill.html',{'currentuser': currentuser},context_instance=RequestContext(request))
+    return render_to_response ('addskill.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser)},context_instance=RequestContext(request))
 
 @login_required    
 def create_job(request):
@@ -410,12 +434,12 @@ def create_job(request):
                 jobdescription = request.POST.get('jobdescription')
                     
                 JobDetails.objects.create(vendorname=vendorobj,jobrole=jobrole,jobdescription=jobdescription,jobstatus='open',assignedto='none',jobcreatedate=date.today())
-                return render_to_response('success.html',{'currentuser': currentuser,'success': "Job created successfully"},
+                return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Job created successfully"},
                                       context_instance=RequestContext(request))
         except Exception as error:
-            return render_to_response('error.html',{'currentuser': currentuser,'error': error},
+            return render_to_response('error.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('createjob.html',{'currentuser': currentuser,'obj':Vendor.objects.all()},context_instance=RequestContext(request))
+    return render_to_response ('createjob.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'obj':Vendor.objects.all()},context_instance=RequestContext(request))
 
 @login_required    
 def assign_job(request):
@@ -430,7 +454,7 @@ def assign_job(request):
                 res1=JobDetails.objects.filter(vendorname_id=vendorname).filter(jobrole=jobrole).update(jobstatus='assigned')
                 JobDetails.objects.filter(vendorname_id=vendorname).filter(jobrole=jobrole).update(
                     assignedto=username)
-                return render_to_response('success.html',{'currentuser': currentuser,'success': "Job assigned successfully to Recruiter " + username},
+                return render_to_response('success.html',{'currentuser': currentuser,'obj1':Recruiter.objects.get(username=currentuser),'success': "Job assigned successfully to Recruiter " + username},
                                       context_instance=RequestContext(request))
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'error': error},
@@ -448,12 +472,12 @@ def change_job_status(request):
                 #print(vendorname,jobrole,jobstatus)
                 result=JobDetails.objects.filter(vendorname_id=vendorname).filter(jobrole=jobrole).update(jobstatus=jobstatus)
                 #print(result)
-                return render_to_response('success.html',{'currentuser': currentuser,'success': "Job status changed successfully to  " + jobstatus},
+                return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Job status changed successfully to  " + jobstatus},
                                       context_instance=RequestContext(request))
         except Exception as error:
-            return render_to_response('error.html',{'currentuser': currentuser,'error': error},
+            return render_to_response('error.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('changejobstatus.html',{'currentuser': currentuser,'obj':JobDetails.objects.values('vendorname').distinct(),'obj1':JobDetails.objects.values('jobrole').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all()},context_instance=RequestContext(request))
+    return render_to_response ('changejobstatus.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'obj':JobDetails.objects.values('vendorname').distinct(),'obj1':JobDetails.objects.values('jobrole').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all()},context_instance=RequestContext(request))
     
 @login_required
 def upload_resume(request):
@@ -467,12 +491,12 @@ def upload_resume(request):
                 recruiterobj = Recruiter.objects.get(username=currentuser)
                 skillobj=TechnicalSkills.objects.get(primaryskill=skillname)
                 Resume.objects.create(candidateemail=candidateemail,candidatename=candidatename,primaryskill=skillobj,resume=request.FILES['inputGroupFile01'],uploaddate=date.today(),resumestatus="submitted",submittedby=recruiterobj)
-                return render_to_response('success.html',{'currentuser': currentuser,'success': "Resume uploaded successfully"},
+                return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Resume uploaded successfully"},
                                       context_instance=RequestContext(request))
         except Exception as error:
-            return render_to_response('error.html',{'currentuser': currentuser,'error': error},
+            return render_to_response('error.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('uploadresume.html',{'currentuser': currentuser,'obj':TechnicalSkills.objects.all()},context_instance=RequestContext(request))
+    return render_to_response ('uploadresume.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'obj':TechnicalSkills.objects.all()},context_instance=RequestContext(request))
 
 @login_required    
 def schedule_interview(request):
@@ -488,10 +512,10 @@ def schedule_interview(request):
                 resumeobj = Resume.objects.get(candidateemail=candidateemail)
                 jobobj = JobDetails.objects.get(vendorname=vendorname,jobrole=jobrole)                
                 Interview.objects.create(jobid=jobobj,candidateemail=resumeobj,interviewdate=temp_date,interviewstatus=interviewstatus)
-                return render_to_response('success.html',{'currentuser': currentuser,'success': "Interview scheduled for " + candidateemail},
+                return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Interview scheduled for " + candidateemail},
                                       context_instance=RequestContext(request))
         except Exception as error:
-            return render_to_response('error.html',{'currentuser': currentuser,'error': error},
+            return render_to_response('error.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'error': error},
                                       context_instance=RequestContext(request))
     '''return render_to_response('uploadresume.html', {'currentuser': currentuser,
                                                     'obj': JobDetails.objects.filter(jobstatus='assigned').filter(
@@ -500,12 +524,12 @@ def schedule_interview(request):
                                                         assignedto=currentuser).values('positionname').distinct()},
                               context_instance=RequestContext(request))'''
 
-    return render_to_response ('scheduleinterview.html',{'currentuser': currentuser,'obj2':Resume.objects.all(),'obj3':JobDetails.objects.all().filter(assignedto=currentuser)},context_instance=RequestContext(request))
+    return render_to_response ('scheduleinterview.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'obj1':Recruiter.objects.get(username=currentuser),'obj2':Resume.objects.all(),'obj3':JobDetails.objects.all().filter(assignedto=currentuser)},context_instance=RequestContext(request))
 
 @login_required
 def search_resume(request):
     currentuser = request.session.get('name1')
-    return render_to_response('searchresume.html', {'currentuser': currentuser, 'obj': Resume.objects.all()},
+    return render_to_response('searchresume.html', {'currentuser': currentuser, 'userobject':Recruiter.objects.get(username=currentuser),'obj': Resume.objects.all()},
                               context_instance=RequestContext(request))
 @login_required
 def generate_report(request):
@@ -566,7 +590,7 @@ def generate_report(request):
                 report1.append(list1) 
 
             
-        return render_to_response('generatereport.html', {'currentuser': currentuser, 'objdict':report1},
+        return render_to_response('generatereport.html', {'currentuser': currentuser, 'userobject':Recruiter.objects.get(username=currentuser),'objdict':report1},
                                   context_instance=RequestContext(request))    
-    return render_to_response('selectdate.html', {'currentuser': currentuser},
+    return render_to_response('selectdate.html', {'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser)},
                                   context_instance=RequestContext(request))        

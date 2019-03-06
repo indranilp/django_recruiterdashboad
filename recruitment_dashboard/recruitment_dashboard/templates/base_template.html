@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Dashboard</title>
+    <title>Recruiter - Dashboard</title>
     
 
     <!-- Bootstrap core CSS-->
@@ -53,13 +53,43 @@
 
       <!-- Navbar -->
       <ul class="navbar-nav ml-auto ml-md-0">
-        
+      <div class="container">
+    <div class="row">
+  
+        <div class="span8">
+            <div class="row">
+                <div class="span4"><font color="red">{{currentuser}}</font></div>
+
+            </div>
+            <div class="row">
+                <div class="span4"><font color="red">{{ userobject.designation}}</font></div>
+
+            </div>
+        </div>
+    </div>
+ 
+</div>
+ 
+                            
+                            <img border="0" src={{ MEDIA_URL }}{{ userobject.picfile }} alt="Profile Pic" width="70" height="70">
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="{% url "logout" %}">Logout</a>                                    
+          {% if currentuser == "admin" %}
+            <a class="dropdown-item" href="{% url "editprofile" %}">Edit Profile</a>
+            <a class="dropdown-item" href="{% url "createuser" %}">Create User</a>
+            <a class="dropdown-item" href="{% url "addvendor" %}">Add Vendor</a>
+            <a class="dropdown-item" href="{% url "addskills" %}">Add Skills</a>
+            <a class="dropdown-item" href="{% url "createjob" %}">Create Job</a>
+            <a class="dropdown-item" href="{% url "assignjob" %}">Assign Job</a>
+            <a class="dropdown-item" href="{% url "changejobstatus" %}">Change Job Status</a>
+            <a class="dropdown-item" href="{% url "logout" %}">Logout</a>  
+          {% else %}  
+            <a class="dropdown-item" href="{% url "editprofile" %}">Edit Profile</a>
+            <a class="dropdown-item" href="{% url "logout" %}">Logout</a>
+           {% endif %}
           </div>
         </li>
       </ul>
@@ -84,12 +114,7 @@
         </li>
         <li class="nav-item">
             {% if currentuser == "admin" %} 
-            <a class="nav-link" href="{% url "createuser" %}">Create User</a>
-            <a class="nav-link" href="{% url "addvendor" %}">Add Vendor</a>
-            <a class="nav-link" href="{% url "addskills" %}">Add Skills</a>
-            <a class="nav-link" href="{% url "createjob" %}">Create Job</a>
-            <a class="nav-link" href="{% url "assignjob" %}">Assign Job</a>
-            <a class="nav-link" href="{% url "changejobstatus" %}">Change Job Status</a>
+   
             <a class="nav-link" href="{% url "generatereport" %}">Generate Report</a>
             <a class="nav-link" href="{% url "generatechart" %}">Generate Chart</a>
             <a class="nav-link" href="{% url "searchresume" %}">Resume Database</a>
@@ -152,6 +177,19 @@
     <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
    <script src="{% static 'js/datetimepicker_css.js' %}"></script>
 	<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="birthdate"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>        
 <script>
     $(document).ready(function(){
       var date_input=$('input[name="startdate"]'); //our date input has the name "date"

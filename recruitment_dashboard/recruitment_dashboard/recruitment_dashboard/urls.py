@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'logout/$', views.logout, name='logout'),
     url(r'^adminhome/$', views.admin_home, name='adminhome'),
     url(r'^userhome/$', views.user_home, name='userhome'),
+    url(r'^editprofile/$', views.edit_profile, name='editprofile'),
     url(r'^createuser/$', views.create_user, name='createuser'),
     url(r'^addvendor/$', views.add_vendor, name='addvendor'),
     url(r'^addskills/$', views.add_skills, name='addskills'),

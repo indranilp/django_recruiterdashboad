@@ -5,6 +5,11 @@ from datetime import date
 # Create your models here.
 class Recruiter(AbstractUser):
     emailid = models.EmailField(null=True,blank=True)
+    gender = models.CharField(max_length=20, blank=True)
+    mobile = models.CharField(max_length=10, blank=True)
+    designation = models.CharField(max_length=30, blank=True)
+    picfile = models.ImageField(upload_to='documents/%Y/%m/%d')
+    birthdate = models.DateField(null=True,blank=True)
 
 class Vendor(models.Model):
     vendorname=models.CharField(max_length=200,primary_key=True)
