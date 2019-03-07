@@ -6,7 +6,7 @@ from django.template import RequestContext
 from django.shortcuts import redirect
 from jobs.models import *
 from datetime import date
-from datetime import datetime
+from datetime import datetime,timedelta
 import pygal
 from django.db.models import Count
 from django.db import connection, transaction
@@ -74,30 +74,45 @@ def login_main(request):
 @login_required                              
 def admin_home(request):
     currentuser = request.session.get('name1')
-    openjobcount = JobDetails.objects.filter(jobstatus='open').count()
-    assignjobcount = JobDetails.objects.filter(jobstatus='assigned').count()
-    closejobcount = JobDetails.objects.filter(jobstatus='closed').count()
+    current_month = datetime.now().month
+    current_year = datetime.now().year
+    openjobcount = JobDetails.objects.filter(jobcreatedate__month=current_month).filter(jobstatus='open').count()
+    assignjobcount = JobDetails.objects.filter(jobcreatedate__month=current_month).filter(jobstatus='assigned').count()
+    closejobcount = JobDetails.objects.filter(jobcreatedate__year=current_year).filter(jobcreatedate__month=current_month).filter(jobstatus='closed').count()
 
     submitcount = Resume.objects.filter(resumestatus="submitted").count()
     screencount = Interview.objects.exclude(interviewstatus="selected").exclude(interviewstatus="rejected").count()
     selectcount = Interview.objects.filter(interviewstatus="selected").count()
     rejectcount = Interview.objects.filter(interviewstatus="rejected").count()
 
-    '''submit_group1 = ProfileDetails.objects.all().filter(profilestatus="submitted").values('submittedby').annotate(
-        total=Count('submittedby'))
+    submit_group1 = JobDetails.objects.all().filter(jobcreatedate__year=current_year).filter(jobcreatedate__month=current_month).filter(jobstatus="closed").values('assignedto').annotate( total=Count('assignedto'))
     result1=[]
     for item in submit_group1:
-        result1.append((item['total'],item['submittedby']))
+        result1.append((item['total'],item['assignedto']))
 
 
     pie_chart = pygal.Pie(width=500, height=400, explicit_size=True)
-    pie_chart.title = 'Submitted Today Data'
+    pie_chart.title = 'Hiring Assessment'
     for r in result1:
         pie_chart.add(r[1], [{'value': r[0], 'label': r[1]}])
     pie_chart.value_formatter = lambda x: "%.15f" % x
     chart_pie1 = pie_chart.render(is_unicode=True)
+    
+    cursor = connection.cursor()
+    
+    cursor.execute('''SELECT count("jobs_jobdetails"."vendorname_id"), "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") WHERE strftime('%%m',"jobs_jobdetails"."jobcreatedate") = (%s) AND strftime('%%Y',"jobs_jobdetails"."jobcreatedate") = (%s) GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole"''',(date.today().strftime('%m'),date.today().strftime('%Y')))
+    
+    rows = cursor.fetchall()
 
-    submit_group2 = ProfileDetails.objects.all().filter(profilestatus="screened").values('submittedby').annotate(
+    
+    b_chart = pygal.Bar(width=500, height=400, explicit_size=True)
+    b_chart.title = "Submissions by Resource by Position"
+    for item in rows:
+        print item
+        b_chart.add(item[1]+"/"+item[2], [item[0]])
+    bar_graph1 = b_chart.render(is_unicode=True)
+
+    '''submit_group2 = ProfileDetails.objects.all().filter(profilestatus="screened").values('submittedby').annotate(
         total=Count('submittedby'))
     result2 = []
     for item in submit_group2:
@@ -123,8 +138,81 @@ def admin_home(request):
     pie_chart.value_formatter = lambda x: "%.15f" % x
     chart_pie3 = pie_chart.render(is_unicode=True)'''
 
-    return render_to_response('adminhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount},
+    return render_to_response('adminhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount,'chart_pie1':chart_pie1,'bar_graph1':bar_graph1},
                               context_instance=RequestContext(request))
+                              
+@login_required                              
+def admin_lastmonth(request):
+    today = date.today()
+    last_day_previous_month = today - timedelta(days=today.day)
+    same_day_last_month = last_day_previous_month.replace(day=today.day)
+    previous_month = same_day_last_month.month
+    previous_year = same_day_last_month.year
+    currentuser = request.session.get('name1')
+    openjobcount = JobDetails.objects.filter(jobcreatedate__month=previous_month).filter(jobstatus='open').count()
+    assignjobcount = JobDetails.objects.filter(jobcreatedate__month=previous_month).filter(jobstatus='assigned').count()
+    closejobcount = JobDetails.objects.filter(jobcreatedate__year=previous_year).filter(jobcreatedate__month=previous_month).filter(jobstatus='closed').count()
+
+    submitcount = Resume.objects.filter(resumestatus="submitted").count()
+    screencount = Interview.objects.exclude(interviewstatus="selected").exclude(interviewstatus="rejected").count()
+    selectcount = Interview.objects.filter(interviewstatus="selected").count()
+    rejectcount = Interview.objects.filter(interviewstatus="rejected").count()
+
+    submit_group1 = JobDetails.objects.all().filter(jobcreatedate__year=previous_year).filter(jobcreatedate__month=previous_month).filter(jobstatus="closed").values('assignedto').annotate( total=Count('assignedto'))
+    result1=[]
+    for item in submit_group1:
+        result1.append((item['total'],item['assignedto']))
+
+
+    pie_chart = pygal.Pie(width=500, height=400, explicit_size=True)
+    pie_chart.title = 'Hiring Assessment'
+    for r in result1:
+        pie_chart.add(r[1], [{'value': r[0], 'label': r[1]}])
+    pie_chart.value_formatter = lambda x: "%.15f" % x
+    chart_pie1 = pie_chart.render(is_unicode=True)
+
+    cursor = connection.cursor()
+    
+    cursor.execute('''SELECT count("jobs_jobdetails"."vendorname_id"), "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") WHERE strftime('%%m',"jobs_jobdetails"."jobcreatedate") = (%s) AND strftime('%%Y',"jobs_jobdetails"."jobcreatedate") = (%s) GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole"''',(same_day_last_month.strftime('%m'),same_day_last_month.strftime('%Y')))
+    
+    rows = cursor.fetchall()
+
+    
+    b_chart = pygal.Bar(width=500, height=400, explicit_size=True)
+    b_chart.title = "Submissions by Resource by Position"
+    for item in rows:
+        print item
+        b_chart.add(item[1]+"/"+item[2], [item[0]])
+    bar_graph1 = b_chart.render(is_unicode=True)
+    
+    '''submit_group2 = ProfileDetails.objects.all().filter(profilestatus="screened").values('submittedby').annotate(
+        total=Count('submittedby'))
+    result2 = []
+    for item in submit_group2:
+        result1.append((item['total'], item['submittedby']))
+
+    pie_chart = pygal.Pie(width=500, height=400, explicit_size=True)
+    pie_chart.title = 'Screened Today Data'
+    for r in result2:
+        pie_chart.add(r[1], [{'value': r[0], 'label': r[1]}])
+    pie_chart.value_formatter = lambda x: "%.15f" % x
+    chart_pie2 = pie_chart.render(is_unicode=True)
+
+    submit_group3 = ProfileDetails.objects.all().filter(profilestatus="selected").values('submittedby').annotate(
+        total=Count('submittedby'))
+    result3 = []
+    for item in submit_group3:
+        result1.append((item['total'], item['submittedby']))
+
+    pie_chart = pygal.Pie(width=500, height=400, explicit_size=True)
+    pie_chart.title = 'Selected Today Data'
+    for r in result3:
+        pie_chart.add(r[1], [{'value': r[0], 'label': r[1]}])
+    pie_chart.value_formatter = lambda x: "%.15f" % x
+    chart_pie3 = pie_chart.render(is_unicode=True)'''
+
+    return render_to_response('adminhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount,'chart_pie1':chart_pie1,'bar_graph1':bar_graph1},
+                              context_instance=RequestContext(request))                              
 
 @login_required                              
 def user_home(request):
@@ -138,6 +226,19 @@ def user_home(request):
     rejectcount = Interview.objects.filter(jobid__assignedto=currentuser).filter(interviewstatus="rejected").count()
     return render_to_response('userhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount},
                               context_instance=RequestContext(request))
+                              
+@login_required                              
+def user_lastmonth(request):
+    currentuser = request.session.get('name1')
+    openjobcount = JobDetails.objects.filter(assignedto=currentuser).filter(jobstatus='open').count()
+    assignjobcount = JobDetails.objects.filter(assignedto=currentuser).filter(jobstatus='assigned').count()
+    closejobcount = JobDetails.objects.filter(assignedto=currentuser).filter(jobstatus='closed').count()
+    submitcount = Resume.objects.filter(submittedby__username=currentuser).filter(resumestatus="submitted").count()    
+    screencount = Interview.objects.filter(jobid__assignedto=currentuser).exclude(interviewstatus="selected").exclude(interviewstatus="rejected").count()
+    selectcount = Interview.objects.filter(jobid__assignedto=currentuser).filter(interviewstatus="selected").count()
+    rejectcount = Interview.objects.filter(jobid__assignedto=currentuser).filter(interviewstatus="rejected").count()
+    return render_to_response('userhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount},
+                              context_instance=RequestContext(request))                              
 
 @login_required                              
 def generate_chart(request):
@@ -432,7 +533,7 @@ def create_job(request):
                 vendorname = request.POST.get('vendorname')
                 jobrole = request.POST.get('jobrole')
                 jobdescription = request.POST.get('jobdescription')
-                    
+                vendorobj = Vendor.objects.get(vendorname=vendorname)    
                 JobDetails.objects.create(vendorname=vendorobj,jobrole=jobrole,jobdescription=jobdescription,jobstatus='open',assignedto='none',jobcreatedate=date.today())
                 return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Job created successfully"},
                                       context_instance=RequestContext(request))

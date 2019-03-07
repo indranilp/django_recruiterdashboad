@@ -1,0 +1,1144 @@
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 09:58:38
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+/usr/lib64/python2.7/site-packages/django/shortcuts.py:45: RemovedInDjango110Warning: The context_instance argument of render_to_string is deprecated.
+  using=using)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.user_home).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.upload_resume).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.schedule_interview).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.update_interview_status).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.search_resume).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+[21/Jan/2019 09:59:05] "GET /searchresume/ HTTP/1.1" 200 10969
+Not Found: /searchresume/charts.html
+[21/Jan/2019 09:59:08] "GET /searchresume/charts.html HTTP/1.1" 404 3589
+Not Found: /searchresume/charts.html
+[21/Jan/2019 09:59:10] "GET /searchresume/charts.html HTTP/1.1" 404 3589
+[21/Jan/2019 09:59:14] "GET /uploadresume/ HTTP/1.1" 200 11500
+[21/Jan/2019 09:59:17] "GET /searchresume/ HTTP/1.1" 200 10969
+[21/Jan/2019 10:03:19] "GET / HTTP/1.1" 200 2139
+/usr/lib64/python2.7/site-packages/django/shortcuts.py:204: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.admin_home).
+  return urlresolvers.reverse(to, args=args, kwargs=kwargs)
+
+[21/Jan/2019 10:03:30] "POST / HTTP/1.1" 302 0
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.admin_home).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.create_user).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.add_vendor).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.add_skills).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.create_job).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.assign_job).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.change_job_status).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.generate_report).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+[21/Jan/2019 10:03:30] "GET /adminhome/ HTTP/1.1" 200 13932
+[21/Jan/2019 10:08:41] "GET / HTTP/1.1" 200 2139
+/usr/lib64/python2.7/site-packages/django/shortcuts.py:204: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.user_home).
+  return urlresolvers.reverse(to, args=args, kwargs=kwargs)
+
+[21/Jan/2019 10:08:57] "POST / HTTP/1.1" 302 0
+[21/Jan/2019 10:08:57] "GET /userhome/ HTTP/1.1" 200 13263
+[21/Jan/2019 10:09:00] "GET /userhome/ HTTP/1.1" 200 13263
+[21/Jan/2019 10:20:30] "GET /userhome/ HTTP/1.1" 200 13263
+[21/Jan/2019 10:20:34] "GET /searchresume/ HTTP/1.1" 200 10969
+Performing system checks...
+
+January 21, 2019 - 09:58:50
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 10:56:29
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 10:58:35
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Python 2.7.14 (default, Jul 26 2018, 19:59:38) 
+[GCC 7.3.1 20180303 (Red Hat 7.3.1-5)] on linux2
+Type "help", "copyright", "credits" or "license" for more information.
+(InteractiveConsole)
+>>> Traceback (most recent call last):
+  File "manage.py", line 10, in <module>
+    execute_from_command_line(sys.argv)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/__init__.py", line 350, in execute_from_command_line
+    utility.execute()
+  File "/usr/lib64/python2.7/site-packages/django/core/management/__init__.py", line 342, in execute
+    self.fetch_command(subcommand).run_from_argv(self.argv)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 348, in run_from_argv
+    self.execute(*args, **cmd_options)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 399, in execute
+    output = self.handle(*args, **options)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/shell.py", line 101, in handle
+    code.interact(local=imported_objects)
+  File "/usr/lib64/python2.7/code.py", line 306, in interact
+    console.interact(banner)
+  File "/usr/lib64/python2.7/code.py", line 234, in interact
+    line = self.raw_input(prompt)
+  File "/usr/lib64/python2.7/code.py", line 281, in raw_input
+    return raw_input(prompt)
+IOError: [Errno 9] Bad file descriptor
+Performing system checks...
+
+January 21, 2019 - 10:58:51
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 11:01:30
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 11:03:49
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 11:09:15
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Unhandled exception in thread started by <function wrapper at 0x7f0d4a3929b0>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 23, in <module>
+    url(r'^$', views.login_main),
+AttributeError: 'module' object has no attribute 'login_main'
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+/usr/lib64/python2.7/site-packages/django/shortcuts.py:45: RemovedInDjango110Warning: The context_instance argument of render_to_string is deprecated.
+  using=using)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.user_home).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.upload_resume).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.schedule_interview).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.update_interview_status).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.search_resume).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+[21/Jan/2019 14:38:33] "GET /searchresume/ HTTP/1.1" 200 10976
+[21/Jan/2019 14:38:35] "GET /searchresume/ HTTP/1.1" 200 10976
+[21/Jan/2019 14:38:47] "GET / HTTP/1.1" 200 2139
+/usr/lib64/python2.7/site-packages/django/shortcuts.py:204: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.admin_home).
+  return urlresolvers.reverse(to, args=args, kwargs=kwargs)
+
+[21/Jan/2019 14:40:55] "POST / HTTP/1.1" 302 0
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.admin_home).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.create_user).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.add_vendor).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.add_skills).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.create_job).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.assign_job).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.change_job_status).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.generate_report).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+[21/Jan/2019 14:40:55] "GET /adminhome/ HTTP/1.1" 200 13932
+[21/Jan/2019 14:41:11] "GET / HTTP/1.1" 200 2139
+[21/Jan/2019 15:19:52] "GET / HTTP/1.1" 200 2139
+[21/Jan/2019 15:19:53] "GET /static/css/signin.css HTTP/1.1" 200 1021
+[21/Jan/2019 15:19:53] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 25868
+[21/Jan/2019 15:19:53] "GET /static/css/bootstrap-theme.min.css HTTP/1.1" 200 13185
+[21/Jan/2019 15:19:54] "GET /static/css/bootstrap.min.css HTTP/1.1" 200 99961
+[21/Jan/2019 15:19:54] "GET /static/fonts/glyphicons-halflings-regular.woff HTTP/1.1" 200 23320
+[21/Jan/2019 15:19:55] "GET /static/ico/favicon.ico HTTP/1.1" 200 1150
+/usr/lib64/python2.7/site-packages/django/shortcuts.py:204: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.user_home).
+  return urlresolvers.reverse(to, args=args, kwargs=kwargs)
+
+[21/Jan/2019 15:20:03] "POST / HTTP/1.1" 302 0
+[21/Jan/2019 15:20:03] "GET /userhome/ HTTP/1.1" 200 13263
+[21/Jan/2019 15:20:04] "GET /static/vendor/datatables/dataTables.bootstrap4.css HTTP/1.1" 200 5799
+[21/Jan/2019 15:20:04] "GET /static/css/sb-admin.css HTTP/1.1" 200 6833
+[21/Jan/2019 15:20:04] "GET /static/vendor/fontawesome-free/css/all.min.css HTTP/1.1" 200 48649
+[21/Jan/2019 15:20:04] "GET /static/vendor/jquery/jquery.min.js HTTP/1.1" 200 86927
+[21/Jan/2019 15:20:04] "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1" 200 70966
+[21/Jan/2019 15:20:04] "GET /static/vendor/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 140936
+[21/Jan/2019 15:20:04] "GET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1" 200 2532
+[21/Jan/2019 15:20:05] "GET /static/vendor/datatables/dataTables.bootstrap4.js HTTP/1.1" 200 4693
+[21/Jan/2019 15:20:05] "GET /static/vendor/chart.js/Chart.min.js HTTP/1.1" 200 159638
+[21/Jan/2019 15:20:05] "GET /static/js/sb-admin.min.js HTTP/1.1" 200 918
+[21/Jan/2019 15:20:05] "GET /static/js/demo/datatables-demo.js HTTP/1.1" 200 103
+[21/Jan/2019 15:20:05] "GET /static/vendor/fontawesome-free/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 67400
+[21/Jan/2019 15:20:05] "GET /static/js/demo/chart-area-demo.js HTTP/1.1" 200 1530
+[21/Jan/2019 15:20:06] "GET /static/js/datetimepicker_css.js HTTP/1.1" 200 39216
+[21/Jan/2019 15:20:06] "GET /static/vendor/datatables/jquery.dataTables.js HTTP/1.1" 200 447569
+Not Found: /favicon.ico
+[21/Jan/2019 15:20:08] "GET /favicon.ico HTTP/1.1" 404 3550
+[21/Jan/2019 15:20:14] "GET /scheduleinterview/ HTTP/1.1" 200 13402
+[21/Jan/2019 15:23:58] "GET /scheduleinterview/ HTTP/1.1" 200 13431
+[21/Jan/2019 15:24:18] "GET /scheduleinterview/ HTTP/1.1" 200 13420
+[21/Jan/2019 15:25:50] "GET /scheduleinterview/ HTTP/1.1" 200 13365
+[21/Jan/2019 15:25:53] "GET /scheduleinterview/ HTTP/1.1" 200 13365
+Performing system checks...
+
+January 21, 2019 - 14:38:20
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Unhandled exception in thread started by <function wrapper at 0x7efd0f764848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 153
+    except
+         ^
+SyntaxError: invalid syntax
+Unhandled exception in thread started by <function wrapper at 0x7f752a3c6848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 35, in <module>
+    url(r'^updateinterviewstatus/$', views.update_interview_status),
+AttributeError: 'module' object has no attribute 'update_interview_status'
+Unhandled exception in thread started by <function wrapper at 0x7f72ab279848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 216
+    return render_to_response ('assignjob.html',{'currentus
+                                                          ^
+SyntaxError: EOL while scanning string literal
+Unhandled exception in thread started by <function wrapper at 0x7f04c46aa848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 35, in <module>
+    url(r'^updateinterviewstatus/$', views.update_interview_status),
+AttributeError: 'module' object has no attribute 'update_interview_status'
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 15:29:06
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Unhandled exception in thread started by <function wrapper at 0x7f6eb3fee848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 153
+    except
+         ^
+SyntaxError: invalid syntax
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 15:32:10
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Unhandled exception in thread started by <function wrapper at 0x7f129690d848>
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 137, in inner_run
+    ipv6=self.use_ipv6, threading=threading)
+  File "/usr/lib64/python2.7/site-packages/django/core/servers/basehttp.py", line 198, in run
+    httpd.serve_forever()
+  File "/usr/lib64/python2.7/SocketServer.py", line 230, in serve_forever
+    r, w, e = _eintr_retry(select.select, [self], [], [],
+AttributeError: 'NoneType' object has no attribute 'select'
+Unhandled exception in thread started by <function wrapper at 0x7fdb68db5848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 153
+    except
+         ^
+SyntaxError: invalid syntax
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 15:32:32
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Unhandled exception in thread started by <function wrapper at 0x7fbdf7887848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 94
+    
+              ^
+SyntaxError: invalid syntax
+Unhandled exception in thread started by <function wrapper at 0x7f5796920848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 262
+    vendorobj = Vendor.objects.get(vendorname=vendorname)
+    ^
+IndentationError: unexpected indent
+Unhandled exception in thread started by <function wrapper at 0x7fef8d178848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 94
+    
+              ^
+SyntaxError: invalid syntax
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 15:34:02
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Unhandled exception in thread started by <function wrapper at 0x7ff4a8ed6848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 153
+    except
+         ^
+SyntaxError: invalid syntax
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 15:40:02
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Unhandled exception in thread started by <function wrapper at 0x7f991a056848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 94
+    
+              ^
+SyntaxError: invalid syntax
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+Performing system checks...
+
+January 21, 2019 - 15:40:17
+Django version 1.9, using settings 'recruitment_dashboard.settings'
+Starting development server at http://0.0.0.0:8000/
+Quit the server with CONTROL-C.
+Unhandled exception in thread started by <function wrapper at 0x7f68f5a4a848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 94
+    
+              ^
+SyntaxError: invalid syntax
+Unhandled exception in thread started by <function wrapper at 0x7f256df24848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 264
+    Interview.objects.create(jobid=jobobj,jobdescription=candidateemail=resumeobj,interviewdate=interviewdate,interviewstatus=interviewstatus)
+                                                                       ^
+SyntaxError: invalid syntax
+Unhandled exception in thread started by <function wrapper at 0x7fa50b7b5848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 216
+    return render_to_response ('assignjob.html',{'currentus
+                                                          ^
+SyntaxError: EOL while scanning string literal
+Unhandled exception in thread started by <function wrapper at 0x7f2c4935a848>
+Performing system checks...
+
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/site-packages/django/utils/autoreload.py", line 226, in wrapper
+    fn(*args, **kwargs)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/commands/runserver.py", line 116, in inner_run
+    self.check(display_num_errors=True)
+  File "/usr/lib64/python2.7/site-packages/django/core/management/base.py", line 426, in check
+    include_deployment_checks=include_deployment_checks,
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/registry.py", line 75, in run_checks
+    new_errors = check(app_configs=app_configs)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 10, in check_url_config
+    return check_resolver(resolver)
+  File "/usr/lib64/python2.7/site-packages/django/core/checks/urls.py", line 19, in check_resolver
+    for pattern in resolver.url_patterns:
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 417, in url_patterns
+    patterns = getattr(self.urlconf_module, "urlpatterns", self.urlconf_module)
+  File "/usr/lib64/python2.7/site-packages/django/utils/functional.py", line 33, in __get__
+    res = instance.__dict__[self.name] = self.func(instance)
+  File "/usr/lib64/python2.7/site-packages/django/core/urlresolvers.py", line 410, in urlconf_module
+    return import_module(self.urlconf_name)
+  File "/usr/lib64/python2.7/importlib/__init__.py", line 37, in import_module
+    __import__(name)
+  File "/home/ec2-user/recruitment_dashboard/recruitment_dashboard/urls.py", line 18, in <module>
+    from jobs import views
+  File "/home/ec2-user/recruitment_dashboard/jobs/views.py", line 264
+    Interview.objects.create(jobid=jobobj,jobdescription=candidateemail=resumeobj,interviewdate=interviewdate,interviewstatus=interviewstatus)
+                                                                       ^
+SyntaxError: invalid syntax
+System check identified some issues:
+
+WARNINGS:
+jobs.JobDetails.jobcreatedate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+jobs.Resume.uploaddate: (fields.W161) Fixed default value provided.
+	HINT: It seems you set a fixed date / time / datetime value as default for this field. This may not be what you want. If you want to have the current date as default, use `django.utils.timezone.now`
+
+System check identified 2 issues (0 silenced).
+/usr/lib64/python2.7/site-packages/django/shortcuts.py:45: RemovedInDjango110Warning: The context_instance argument of render_to_string is deprecated.
+  using=using)
+
+[21/Jan/2019 16:49:00] "GET / HTTP/1.1" 200 2139
+/usr/lib64/python2.7/site-packages/django/shortcuts.py:204: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.admin_home).
+  return urlresolvers.reverse(to, args=args, kwargs=kwargs)
+
+[21/Jan/2019 16:49:09] "POST / HTTP/1.1" 302 0
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.admin_home).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.create_user).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.add_vendor).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.add_skills).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.create_job).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.assign_job).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.change_job_status).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.generate_report).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+/usr/lib64/python2.7/site-packages/django/template/defaulttags.py:499: RemovedInDjango110Warning: Reversing by dotted path is deprecated (jobs.views.search_resume).
+  url = reverse(view_name, args=args, kwargs=kwargs, current_app=current_app)
+
+[21/Jan/2019 16:49:09] "GET /adminhome/ HTTP/1.1" 200 13932
+[21/Jan/2019 16:49:18] "GET /changejobstatus/ HTTP/1.1" 200 12955
+[21/Jan/2019 16:49:25] "POST /changejobstatus/ HTTP/1.1" 200 10495
+[21/Jan/2019 16:49:28] "GET /adminhome/ HTTP/1.1" 200 13932
+[21/Jan/2019 21:15:57] "GET / HTTP/1.0" 200 2139
+[22/Jan/2019 01:30:03] "GET /static/ico/apple-touch-icon-144-precomposed.png HTTP/1.1" 404 1738
+[22/Jan/2019 01:30:04] "GET /static/ico/apple-touch-icon-114-precomposed.png HTTP/1.1" 404 1738
+[22/Jan/2019 01:30:05] "GET /static/ico/apple-touch-icon-72-precomposed.png HTTP/1.1" 404 1735
+[22/Jan/2019 01:30:05] "GET /static/ico/apple-touch-icon-57-precomposed.png HTTP/1.1" 404 1735
+[22/Jan/2019 03:39:33] "GET / HTTP/1.0" 200 2139
+[22/Jan/2019 03:39:34] "GET / HTTP/1.0" 200 2139
+[22/Jan/2019 03:39:34] "GET / HTTP/1.1" 200 2139
+[22/Jan/2019 10:34:54] "GET / HTTP/1.1" 200 2139
+[22/Jan/2019 10:35:07] "POST / HTTP/1.1" 302 0
+[22/Jan/2019 10:35:07] "GET /adminhome/ HTTP/1.1" 200 13932
+[22/Jan/2019 10:35:09] "GET /static/vendor/datatables/jquery.dataTables.js HTTP/1.1" 200 447569
+Not Found: /favicon.ico
+[22/Jan/2019 10:35:10] "GET /favicon.ico HTTP/1.1" 404 3426
+[22/Jan/2019 10:35:18] "GET / HTTP/1.1" 200 2139
+[22/Jan/2019 10:47:31] code 400, message Bad HTTP/0.9 request type ('RFB')
+[22/Jan/2019 10:47:31] "RFB 003.003" 400 -
+[22/Jan/2019 14:07:48] "GET / HTTP/1.1" 200 2139
+[22/Jan/2019 14:07:49] "GET /static/css/signin.css HTTP/1.1" 200 1021
+[22/Jan/2019 14:07:49] "GET /static/css/bootstrap-theme.min.css HTTP/1.1" 200 13185
+[22/Jan/2019 14:07:49] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 25868
+[22/Jan/2019 14:07:49] "GET /static/css/bootstrap.min.css HTTP/1.1" 200 99961
+[22/Jan/2019 14:07:50] "GET /static/fonts/glyphicons-halflings-regular.woff HTTP/1.1" 200 23320
+[22/Jan/2019 14:07:51] "GET /static/ico/favicon.ico HTTP/1.1" 200 1150
+[22/Jan/2019 14:08:02] "POST / HTTP/1.1" 200 2173
+[22/Jan/2019 14:08:14] "POST / HTTP/1.1" 302 0
+[22/Jan/2019 14:08:14] "GET /adminhome/ HTTP/1.1" 200 13932
+[22/Jan/2019 14:08:15] "GET /static/vendor/datatables/dataTables.bootstrap4.css HTTP/1.1" 200 5799
+[22/Jan/2019 14:08:15] "GET /static/css/sb-admin.css HTTP/1.1" 200 6833
+[22/Jan/2019 14:08:15] "GET /static/vendor/fontawesome-free/css/all.min.css HTTP/1.1" 200 48649
+[22/Jan/2019 14:08:15] "GET /static/vendor/jquery/jquery.min.js HTTP/1.1" 200 86927
+[22/Jan/2019 14:08:15] "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1" 200 70966
+[22/Jan/2019 14:08:15] "GET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1" 200 2532
+[22/Jan/2019 14:08:15] "GET /static/vendor/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 140936
+[22/Jan/2019 14:08:16] "GET /static/vendor/datatables/dataTables.bootstrap4.js HTTP/1.1" 200 4693
+[22/Jan/2019 14:08:16] "GET /static/vendor/chart.js/Chart.min.js HTTP/1.1" 200 159638
+[22/Jan/2019 14:08:16] "GET /static/js/demo/datatables-demo.js HTTP/1.1" 200 103
+[22/Jan/2019 14:08:16] "GET /static/js/sb-admin.min.js HTTP/1.1" 200 918
+[22/Jan/2019 14:08:16] "GET /static/js/demo/chart-area-demo.js HTTP/1.1" 200 1530
+[22/Jan/2019 14:08:16] "GET /static/js/datetimepicker_css.js HTTP/1.1" 200 39216
+[22/Jan/2019 14:08:16] "GET /static/vendor/fontawesome-free/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 67400
+[22/Jan/2019 14:08:16] "GET /static/vendor/datatables/jquery.dataTables.js HTTP/1.1" 200 447569
+Not Found: /favicon.ico
+[22/Jan/2019 14:08:18] "GET /favicon.ico HTTP/1.1" 404 3426
+Not Found: /adminhome/charts.html
+[22/Jan/2019 14:08:27] "GET /adminhome/charts.html HTTP/1.1" 404 3456
+Not Found: /adminhome/tables.html
+[22/Jan/2019 14:08:39] "GET /adminhome/tables.html HTTP/1.1" 404 3456
+[22/Jan/2019 14:08:43] "GET /adminhome/ HTTP/1.1" 200 13932
+[23/Jan/2019 04:41:17] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00/*\xe0\x00\x00\x00\x00\x00Cookie:')
+[23/Jan/2019 04:41:17] 
+[23/Jan/2019 10:11:01] "GET / HTTP/1.1" 200 2139
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/SocketServer.py", line 596, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/lib64/python2.7/SocketServer.py", line 331, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib64/python2.7/site-packages/django/core/servers/basehttp.py", line 99, in __init__
+    super(WSGIRequestHandler, self).__init__(*args, **kwargs)
+  File "/usr/lib64/python2.7/SocketServer.py", line 652, in __init__
+    self.handle()
+  File "/usr/lib64/python2.7/site-packages/django/core/servers/basehttp.py", line 164, in handle
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/lib64/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+error: [Errno 104] Connection reset by peer
+[23/Jan/2019 19:34:48] "GET / HTTP/1.1" 200 2139
+[24/Jan/2019 06:36:04] code 400, message Bad HTTP/0.9 request type ('\x00\x00\x00')
+[24/Jan/2019 06:36:04] "    c                           " 400 -
+[24/Jan/2019 08:39:34] "GET / HTTP/1.1" 200 2139
+Not Found: /index.action
+[24/Jan/2019 08:39:35] "GET /index.action HTTP/1.1" 404 3429
+[24/Jan/2019 09:43:12] "GET / HTTP/1.1" 200 2139
+[24/Jan/2019 09:43:13] "GET /static/ico/apple-touch-icon-144-precomposed.png HTTP/1.1" 404 1738
+[24/Jan/2019 09:43:13] "GET /static/ico/apple-touch-icon-114-precomposed.png HTTP/1.1" 404 1738
+[24/Jan/2019 09:43:14] "GET /static/ico/apple-touch-icon-72-precomposed.png HTTP/1.1" 404 1735
+[24/Jan/2019 09:43:15] "GET /static/ico/apple-touch-icon-57-precomposed.png HTTP/1.1" 404 1735
+[24/Jan/2019 09:43:21] "POST / HTTP/1.1" 302 0
+[24/Jan/2019 09:43:21] "GET /adminhome/ HTTP/1.1" 200 13932
+[24/Jan/2019 09:43:22] "GET /static/vendor/jquery/jquery.min.js HTTP/1.1" 200 86927
+[24/Jan/2019 09:43:22] "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1" 200 70966
+[24/Jan/2019 09:43:22] "GET /static/vendor/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 140936
+[24/Jan/2019 09:43:22] "GET /static/vendor/chart.js/Chart.min.js HTTP/1.1" 200 159638
+[24/Jan/2019 09:43:23] "GET /static/vendor/datatables/jquery.dataTables.js HTTP/1.1" 200 447569
+Not Found: /favicon.ico
+[24/Jan/2019 09:43:24] "GET /favicon.ico HTTP/1.1" 404 3426
+[24/Jan/2019 09:43:26] "GET /searchresume/ HTTP/1.1" 200 11463
+Not Found: /favicon.ico
+[24/Jan/2019 10:28:17] "GET /favicon.ico HTTP/1.1" 404 3426
+[24/Jan/2019 17:24:46] "GET / HTTP/1.1" 200 2139
+Not Found: /http:/www.ip138.com/
+[24/Jan/2019 21:02:54] "GET http://www.ip138.com/ HTTP/1.1" 404 1660
+[25/Jan/2019 02:42:49] "GET / HTTP/1.1" 200 2139
+Not Found: /ISAPI/System/Network/DDNS/capabilities
+[25/Jan/2019 10:30:57] "GET /ISAPI/System/Network/DDNS/capabilities HTTP/1.1" 404 3507
+Not Found: /ISAPI/System/Network/DDNS/capabilities
+[25/Jan/2019 10:30:57] "GET /ISAPI/System/Network/DDNS/capabilities HTTP/1.1" 404 3507
+Not Found: /ISAPI/System/Network/DDNS/capabilities
+[25/Jan/2019 10:30:57] "GET /ISAPI/System/Network/DDNS/capabilities HTTP/1.1" 404 3507
+Not Found: /ISAPI/System/Network/DDNS/capabilities
+[25/Jan/2019 10:30:57] "GET /ISAPI/System/Network/DDNS/capabilities HTTP/1.1" 404 3507
+Not Found: /ISAPI/System/Network/DDNS/capabilities
+[25/Jan/2019 10:30:58] "GET /ISAPI/System/Network/DDNS/capabilities HTTP/1.1" 404 3507
+Not Found: /ISAPI/System/Network/DDNS/capabilities
+[25/Jan/2019 10:30:58] "GET /ISAPI/System/Network/DDNS/capabilities HTTP/1.1" 404 3507
+[26/Jan/2019 00:44:20] "GET / HTTP/1.1" 200 2139
+[26/Jan/2019 02:38:43] "GET / HTTP/1.0" 200 2139
+[26/Jan/2019 16:32:49] "GET / HTTP/1.1" 200 2139
+[27/Jan/2019 16:42:22] "GET / HTTP/1.1" 200 2139
+[27/Jan/2019 21:16:52] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:52] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:52] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:52] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:53] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:53] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:53] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:53] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:54] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:54] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:54] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:54] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:55] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:55] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:55] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:55] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:56] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:56] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:56] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:56] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:57] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:57] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:57] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:57] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+[27/Jan/2019 21:16:58] code 400, message Bad request syntax ('{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}')
+[27/Jan/2019 21:16:58] "{"method":"login","params":{"login":"45JymPWP1DeQxxMZNJv9w2bTQ2WJDAmw18wUSryDQa3RPrympJPoUSVcFEDv3bhiMJGWaCD4a3KrFCorJHCMqXJUKApSKDV","pass":"xxoo","agent":"xmr-stak-cpu/1.3.0-1.5.0"},"id":1}" 400 -
+Traceback (most recent call last):
+  File "/usr/lib64/python2.7/SocketServer.py", line 596, in process_request_thread
+    self.finish_request(request, client_address)
+  File "/usr/lib64/python2.7/SocketServer.py", line 331, in finish_request
+    self.RequestHandlerClass(request, client_address, self)
+  File "/usr/lib64/python2.7/site-packages/django/core/servers/basehttp.py", line 99, in __init__
+    super(WSGIRequestHandler, self).__init__(*args, **kwargs)
+  File "/usr/lib64/python2.7/SocketServer.py", line 652, in __init__
+    self.handle()
+  File "/usr/lib64/python2.7/site-packages/django/core/servers/basehttp.py", line 164, in handle
+    self.raw_requestline = self.rfile.readline(65537)
+  File "/usr/lib64/python2.7/socket.py", line 480, in readline
+    data = self._sock.recv(self._rbufsize)
+error: [Errno 104] Connection reset by peer
+[28/Jan/2019 19:24:50] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00*%\xe0\x00\x00\x00\x00\x00Cookie:')
+[28/Jan/2019 19:24:50] 
+[28/Jan/2019 19:24:50] code 400, message Bad HTTP/0.9 request type ('\x03\x00\x00*%\xe0\x00\x00\x00\x00\x00Cookie:')
+[28/Jan/2019 19:24:50] 
+[29/Jan/2019 05:28:59] "GET / HTTP/1.1" 200 2139
+[29/Jan/2019 05:28:59] "GET /static/css/signin.css HTTP/1.1" 200 1021
+[29/Jan/2019 05:28:59] "GET /static/css/bootstrap-theme.min.css HTTP/1.1" 200 13185
+[29/Jan/2019 05:28:59] "GET /static/js/bootstrap.min.js HTTP/1.1" 200 25868
+[29/Jan/2019 05:28:59] "GET /static/css/bootstrap.min.css HTTP/1.1" 200 99961
+[29/Jan/2019 05:29:01] "GET /static/fonts/glyphicons-halflings-regular.woff HTTP/1.1" 200 23320
+[29/Jan/2019 05:29:01] "GET /static/ico/favicon.ico HTTP/1.1" 200 1150
+[29/Jan/2019 05:29:01] "GET /static/ico/apple-touch-icon-144-precomposed.png HTTP/1.1" 404 1738
+[29/Jan/2019 05:29:02] "GET /static/ico/apple-touch-icon-114-precomposed.png HTTP/1.1" 404 1738
+[29/Jan/2019 05:29:03] "GET /static/ico/apple-touch-icon-72-precomposed.png HTTP/1.1" 404 1735
+[29/Jan/2019 05:29:03] "GET /static/ico/apple-touch-icon-57-precomposed.png HTTP/1.1" 404 1735
+[29/Jan/2019 05:29:08] "POST / HTTP/1.1" 302 0
+[29/Jan/2019 05:29:08] "GET /adminhome/ HTTP/1.1" 200 13932
+[29/Jan/2019 05:29:09] "GET /static/vendor/datatables/dataTables.bootstrap4.css HTTP/1.1" 200 5799
+[29/Jan/2019 05:29:09] "GET /static/vendor/fontawesome-free/css/all.min.css HTTP/1.1" 200 48649
+[29/Jan/2019 05:29:09] "GET /static/css/sb-admin.css HTTP/1.1" 200 6833
+[29/Jan/2019 05:29:09] "GET /static/vendor/jquery/jquery.min.js HTTP/1.1" 200 86927
+[29/Jan/2019 05:29:09] "GET /static/vendor/bootstrap/js/bootstrap.bundle.min.js HTTP/1.1" 200 70966
+[29/Jan/2019 05:29:09] "GET /static/vendor/bootstrap/css/bootstrap.min.css HTTP/1.1" 200 140936
+[29/Jan/2019 05:29:09] "GET /static/vendor/jquery-easing/jquery.easing.min.js HTTP/1.1" 200 2532
+[29/Jan/2019 05:29:10] "GET /static/vendor/chart.js/Chart.min.js HTTP/1.1" 200 159638
+[29/Jan/2019 05:29:10] "GET /static/js/sb-admin.min.js HTTP/1.1" 200 918
+[29/Jan/2019 05:29:10] "GET /static/vendor/datatables/dataTables.bootstrap4.js HTTP/1.1" 200 4693
+[29/Jan/2019 05:29:10] "GET /static/js/demo/datatables-demo.js HTTP/1.1" 200 103
+[29/Jan/2019 05:29:10] "GET /static/js/demo/chart-area-demo.js HTTP/1.1" 200 1530
+[29/Jan/2019 05:29:11] "GET /static/js/datetimepicker_css.js HTTP/1.1" 200 39216
+[29/Jan/2019 05:29:11] "GET /static/vendor/fontawesome-free/webfonts/fa-solid-900.woff2 HTTP/1.1" 200 67400
+[29/Jan/2019 05:29:11] "GET /static/vendor/datatables/jquery.dataTables.js HTTP/1.1" 200 447569
+Not Found: /favicon.ico
+[29/Jan/2019 05:29:12] "GET /favicon.ico HTTP/1.1" 404 3426
+[29/Jan/2019 05:29:15] "GET /searchresume/ HTTP/1.1" 200 11463
