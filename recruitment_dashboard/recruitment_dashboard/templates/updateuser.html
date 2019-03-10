@@ -1,0 +1,71 @@
+{% extends "base_template.html" %}
+{% block content %}
+
+      <div id="content-wrapper">
+
+        <div class="container-fluid">
+
+        
+          <!-- Breadcrumbs-->
+          <ol class="breadcrumb">   
+<form id="contactform" method="post" enctype="multipart/form-data">
+{% csrf_token %}    
+  <div class="form-group">
+    <label for="FormControlTextarea1">UserName</label>
+    <input type="text" class="form-control" id="username1"  name="username1" disabled="disabled">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" class="form-control" id="email1" name="email1" aria-describedby="emailHelp" placeholder="Enter email">
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" class="form-control" id="password1" name="password1" placeholder="Password" disabled="disabled">
+  </div>
+    <div class="form-group">
+    <label for="FormControlTextarea1">Designation</label>
+    <input type="text" class="form-control" id="designation1"  name="designation1">
+  </div>
+  <div class="form-group">    
+<label for="FormControlTextarea1">Gender</label>    
+<select class="custom-select" name="gender1" id="gender1" style="text-align:right;" required="">
+<option value="">Select Gender</option>
+
+<option value="male">male</option>
+<option value="female">female</option>
+</select>
+</div> 
+     <div class="form-group"> <!-- Date input -->
+        <label class="control-label" for="date">Birth Date</label>
+        <input class="form-control" id="birthdate1" name="birthdate1" placeholder="MM/DD/YYY" type="text" disabled="disabled"/>
+      </div>   
+    <div class="form-group">
+    <label for="FormControlTextarea1">Mobile</label>
+    <input type="text" class="form-control" id="mobile1"  name="mobile1">
+  </div>  
+      <div class="form-group">
+				<p class="contact"><label for="UploadPic">Upload Pic</label></p>
+				<input type="file" name="pic1" id="pic1" accept="image/*" tabindex="14" required="">
+				<br>  
+  </div>                  
+  <button type="submit" class="btn btn-primary">Update</button>  
+</form  
+
+          </ol>
+
+    
+        </div>
+        <!-- /.container-fluid -->
+
+        <!-- Sticky Footer -->
+        <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Your Website 2018</span>
+            </div>
+          </div>
+        </footer>
+
+      </div>
+      <!-- /.content-wrapper -->
+{% endblock content %}       

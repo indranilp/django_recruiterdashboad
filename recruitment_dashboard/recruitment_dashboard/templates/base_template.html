@@ -34,7 +34,7 @@
 
   </head>
 
-  <body id="page-top">
+  <body id="page-top" onload="Call3()">
 
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
       {% if currentuser == "admin" %}
@@ -70,8 +70,13 @@
  
 </div>
  
+            {% if currentuser == "admin" %}
                             
-                            <img border="0" src={{ MEDIA_URL }}{{ userobject.picfile }} alt="Profile Pic" width="70" height="70">
+                            <img border="0" src="{% static 'images/Profile_Pic.png' %}" alt="Profile Pic" width="70" height="70">
+                            
+            {% else %}
+                            <img border="0" src={{ userobject.picfile.url}} alt="Profile Pic" width="70" height="70">
+            {% endif %}
         <li class="nav-item dropdown no-arrow">
           <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw"></i>
@@ -117,11 +122,13 @@
    
             <a class="nav-link" href="{% url "generatereport" %}">Generate Report</a>
             <a class="nav-link" href="{% url "generatechart" %}">Generate Chart</a>
-            <a class="nav-link" href="{% url "searchresume" %}">Resume Database</a>
+            <a class="nav-link" href="{% url "openrequirement" %}">Open Requirements</a>
+            <a class="nav-link" href="{% url "searchresume" %}">Find Profile</a>
             {% else %}
             <a class="nav-link" href="{% url "uploadresume" %}">Upload Resume</a>
             <a class="nav-link" href="{% url "scheduleinterview" %}">Schedule Interview</a>
-            <a class="nav-link" href="{% url "searchresume" %}">Resume Database</a>
+            <a class="nav-link" href="{% url "openrequirement" %}">Open Requirements</a>
+            <a class="nav-link" href="{% url "searchresume" %}">Find Profile</a>
             {% endif %}
         </li>
       </ul>
@@ -216,7 +223,24 @@
       date_input.datepicker(options);
     })
 </script> 
+	<script>
+function Call3()
+	{
+		
+                     document.getElementById("username1").value = "{{userobject.username}}".replace(/&quot;/g,"\"")
+					document.getElementById("email1").value = "{{userobject.email}}".replace(/&quot;/g,"\"")
+					document.getElementById("password1").value = "{{userobject.password}}".replace(/&quot;/g,"\"")
+					document.getElementById("designation1").value = "{{userobject.designation}}".replace(/&quot;/g,"\"")
+					document.getElementById("gender1").value = "{{userobject.gender}}".replace(/&quot;/g,"\"")
+					document.getElementById("birthdate1").value = "{{userobject.birthdate}}".replace(/&quot;/g,"\"")
+                    document.getElementById("mobile1").value = "{{userobject.mobile}}".replace(/&quot;/g,"\"")
 
+					
+				
+			return true;
+	
+	}
+	  </script>
 	<script>
 function Call2()
 	{

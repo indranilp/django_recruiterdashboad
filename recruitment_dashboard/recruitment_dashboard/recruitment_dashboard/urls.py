@@ -16,6 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from jobs import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 
 urlpatterns = [
@@ -38,5 +40,6 @@ urlpatterns = [
     url(r'^uploadresume/$', views.upload_resume, name='uploadresume'),
     url(r'^scheduleinterview/$', views.schedule_interview, name='scheduleinterview'),
     url(r'^searchresume/$', views.search_resume, name='searchresume'),
+    url(r'^openrequirement/$', views.open_requirement, name='openrequirement'),
 
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
