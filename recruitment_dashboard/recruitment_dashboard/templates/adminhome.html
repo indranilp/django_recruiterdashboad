@@ -8,46 +8,50 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
                   {% if currentuser == "admin" %}
-      <a href="{% url "adminhome" %}">Current Month</a>
+      <a href="{% url "adminhome" %}" class="btn btn-info" role="button">Current Month</a>                        
       {% else %}
-      <a  href="{% url "userhome" %}">Current Month</a>
+      <a href="{% url "userhome" %}" class="btn btn-info" role="button">Current Month</a> 
       {% endif %}
       {% if currentuser == "admin" %}
-      <a href="{% url "adminlastmonth" %}">Last Month</a>
+      <a href="{% url "adminlastmonth" %}" class="btn btn-info" role="button">Last Month</a>
       {% else %}
-      <a  href="{% url "userlastmonth" %}">Last Month</a>
+     <a href="{% url "userlastmonth" %}" class="btn btn-info" role="button">Last Month</a>
       {% endif %}
-            </li>    
+            </li>  
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-info" role="button" >Total Closure {{closejobcount}}</a>
+  
+
           </ol>
-
-          <!-- Icon Cards-->
-          <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-primary o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                    <i class="fas fa-fw fa-comments"></i>
-                  </div>
-                  <div class="mr-5">Total Closure {{closejobcount}}</div>
-                </div>
-              </div>
-            </div>
-
 
 
  
         </div>
         <!-- /.container-fluid -->
            <div>
+           
   {{ chart_pie1|safe }}
   <script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
+             <div>
+  {{ bar_grpah2|safe }}
+  <script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
+   </div> 
    </div>  
            <div>
   {{ bar_graph1|safe }}
   <script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
    </div> 
            <div>
-  {{ chart_pie3|safe }}
+  {{ bar_grpah2|safe }}
   <script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
    </div>       
         <!-- Sticky Footer -->

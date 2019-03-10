@@ -8,14 +8,14 @@
           <ol class="breadcrumb">
             <li class="breadcrumb-item">
                   {% if currentuser == "admin" %}
-      <a href="{% url "adminhome" %}">Current Month</a>
+      <a href="{% url "adminhome" %}" class="btn btn-info" role="button">Current Month</a>                        
       {% else %}
-      <a  href="{% url "userhome" %}">Current Month</a>
+      <a href="{% url "userhome" %}" class="btn btn-info" role="button">Current Month</a> 
       {% endif %}
       {% if currentuser == "admin" %}
-      <a href="{% url "adminlastmonth" %}">Last Month</a>
+      <a href="{% url "adminlastmonth" %}" class="btn btn-info" role="button">Last Month</a>
       {% else %}
-      <a  href="{% url "userlastmonth" %}">Last Month</a>
+     <a href="{% url "userlastmonth" %}" class="btn btn-info" role="button">Last Month</a>
       {% endif %}
             </li>    
           </ol>

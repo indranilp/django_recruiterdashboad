@@ -108,11 +108,25 @@ def admin_home(request):
     b_chart = pygal.Bar(width=500, height=400, explicit_size=True)
     b_chart.title = "Submissions by Resource by Position"
     for item in rows:
-        print item
         b_chart.add(item[1]+"/"+item[2], [item[0]])
     bar_graph1 = b_chart.render(is_unicode=True)
 
-    return render_to_response('adminhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount,'chart_pie1':chart_pie1,'bar_graph1':bar_graph1},
+    
+    cursor.execute('''SELECT count("jobs_jobdetails"."vendorname_id"), "jobs_jobdetails"."vendorname_id" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") WHERE strftime('%%m',"jobs_jobdetails"."jobcreatedate") = (%s) AND strftime('%%Y',"jobs_jobdetails"."jobcreatedate") = (%s) GROUP BY "jobs_jobdetails"."vendorname_id" ''',(date.today().strftime('%m'),date.today().strftime('%Y')))
+    
+    rows1 = cursor.fetchall()
+
+    
+    b_chart1 = pygal.HorizontalBar(width=500, height=400, explicit_size=True)
+    b_chart1.title = "Pipeline of Positions"
+    for item in rows1:
+        print(item)
+        b_chart1.add(item[1], [item[0]])
+    bar_graph2 = b_chart1.render(is_unicode=True)
+    
+
+
+    return render_to_response('adminhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount,'chart_pie1':chart_pie1,'bar_graph1':bar_graph1,'bar_graph2':bar_graph2},
                               context_instance=RequestContext(request))
                               
 @login_required                              

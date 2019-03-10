@@ -1,5 +1,25 @@
 <!DOCTYPE html>
 {% load staticfiles %}
+<style type="text/css">
+.navbar-default {
+    background-color: #485d89 !important;
+    border-color: #E7E7E7;
+}
+.bg-dark {
+    background-color: #485d89 !important;
+    border-color: #E7E7E7;
+}
+.navbar {
+    background-color: #485d89 !important;
+    border-color: #E7E7E7;
+}
+
+.sidebar {
+    background-color: #485d89 !important;
+    border-color: #E7E7E7;
+}
+
+</style>
 <html lang="en">
 
   <head>
@@ -36,7 +56,7 @@
 
   <body id="page-top" onload="Call3()">
 
-    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+    <nav class="navbar navbar-expand navbar-dark static-top" >
       {% if currentuser == "admin" %}
       <a class="navbar-brand mr-1" href="{% url "adminhome" %}">Recruiter Dashboard</a>
       {% else %}
@@ -89,6 +109,8 @@
             <a class="dropdown-item" href="{% url "addskills" %}">Add Skills</a>
             <a class="dropdown-item" href="{% url "createjob" %}">Create Job</a>
             <a class="dropdown-item" href="{% url "assignjob" %}">Assign Job</a>
+            <a class="dropdown-item" href="{% url "generatereport" %}">Generate Report</a>
+            <a class="dropdown-item" href="{% url "generatechart" %}">Generate Chart</a>
             <a class="dropdown-item" href="{% url "changejobstatus" %}">Change Job Status</a>
             <a class="dropdown-item" href="{% url "logout" %}">Logout</a>  
           {% else %}  
@@ -119,16 +141,13 @@
         </li>
         <li class="nav-item">
             {% if currentuser == "admin" %} 
-   
-            <a class="nav-link" href="{% url "generatereport" %}">Generate Report</a>
-            <a class="nav-link" href="{% url "generatechart" %}">Generate Chart</a>
             <a class="nav-link" href="{% url "openrequirement" %}">Open Requirements</a>
-            <a class="nav-link" href="{% url "searchresume" %}">Find Profile</a>
+            <a class="nav-link" href="{% url "searchresume" %}">Resume Database</a>
             {% else %}
             <a class="nav-link" href="{% url "uploadresume" %}">Upload Resume</a>
             <a class="nav-link" href="{% url "scheduleinterview" %}">Schedule Interview</a>
             <a class="nav-link" href="{% url "openrequirement" %}">Open Requirements</a>
-            <a class="nav-link" href="{% url "searchresume" %}">Find Profile</a>
+            <a class="nav-link" href="{% url "searchresume" %}">Resume Database</a>
             {% endif %}
         </li>
       </ul>
