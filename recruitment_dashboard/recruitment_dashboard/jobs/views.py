@@ -12,6 +12,7 @@ from django.db.models import Count
 from django.db import connection, transaction
 import pandas as pd
 from django.contrib.auth.decorators import login_required
+import json
 
 current_date = date.today()
 current_month = datetime.now().month
@@ -109,10 +110,20 @@ def admin_home(request):
     b_chart = pygal.Bar(width=500, height=400, explicit_size=True)
     b_chart.title = "Submissions by Resource by Position"
     for item in rows:
-        b_chart.add(item[1]+"/"+item[2], [item[0]])
-        graph_label_list.append(item[3])
+        if item[3] not in graph_label_list:
+            graph_label_list.append(item[3])
+    b_chart.x_labels = graph_label_list    
+    for item in rows:
+        data_list = []
+        for j in graph_label_list:
+            data_list.append(0)
+        for value in graph_label_list:
+            if value in item:
+                index = graph_label_list.index(value)
+                data_list[index] = item[0]
+        b_chart.add(item[1]+"/"+item[2], data_list)
         table_list.append(item)
-    b_chart.x_labels = graph_label_list
+
     bar_graph1 = b_chart.render(is_unicode=True)
     #print table_list
 
@@ -129,9 +140,18 @@ def admin_home(request):
         b_chart1.add(item[1], [item[0]])
     bar_graph2 = b_chart1.render(is_unicode=True)
     
+    funnel_list=[]
+    for item in rows1:
+        funnel_row={}
+        funnel_row['y'] = item[0]
+        funnel_row['label'] = item[1]
+        funnel_list.append(funnel_row)
+    data = json.dumps(funnel_list)
+    
+    
 
 
-    return render_to_response('adminhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount,'chart_pie1':chart_pie1,'bar_graph1':bar_graph1,'bar_graph2':bar_graph2,'table_list':table_list},
+    return render_to_response('adminhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount,'chart_pie1':chart_pie1,'bar_graph1':bar_graph1,'bar_graph2':bar_graph2,'table_list':table_list,'data':data},
                               context_instance=RequestContext(request))
                               
 @login_required                              
@@ -176,10 +196,20 @@ def admin_lastmonth(request):
     b_chart = pygal.Bar(width=500, height=400, explicit_size=True)
     b_chart.title = "Submissions by Resource by Position"
     for item in rows:
-        b_chart.add(item[1]+"/"+item[2], [item[0]])
-        graph_label_list.append(item[3])
+        if item[3] not in graph_label_list:
+            graph_label_list.append(item[3])
+    b_chart.x_labels = graph_label_list    
+    for item in rows:
+        data_list = []
+        for j in graph_label_list:
+            data_list.append(0)
+        for value in graph_label_list:
+            if value in item:
+                index = graph_label_list.index(value)
+                data_list[index] = item[0]
+        b_chart.add(item[1]+"/"+item[2], data_list)
         table_list.append(item)
-    b_chart.x_labels = graph_label_list        
+
     bar_graph1 = b_chart.render(is_unicode=True)
 
 
@@ -195,7 +225,14 @@ def admin_lastmonth(request):
         b_chart1.add(item[1], [item[0]])
     bar_graph2 = b_chart1.render(is_unicode=True)
 
-    return render_to_response('adminhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount,'chart_pie1':chart_pie1,'bar_graph1':bar_graph1,'bar_graph2':bar_graph2,'table_list':table_list},
+    funnel_list=[]
+    for item in rows1:
+        funnel_row={}
+        funnel_row['y'] = item[0]
+        funnel_row['label'] = item[1]
+        funnel_list.append(funnel_row)
+    data = json.dumps(funnel_list)
+    return render_to_response('adminhome.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'closejobcount':closejobcount,'assignjobcount':assignjobcount,'openjobcount':openjobcount,'submitcount':submitcount,'screencount':screencount,'selectcount':selectcount,'rejectcount':rejectcount,'chart_pie1':chart_pie1,'bar_graph1':bar_graph1,'bar_graph2':bar_graph2,'table_list':table_list,'data':data},
                               context_instance=RequestContext(request))                              
 
 @login_required                              

@@ -1,5 +1,40 @@
 {% extends "base_template.html" %}
 {% block content %}
+<script>
+window.onload = function () {
+
+var chart = new CanvasJS.Chart("port2-second-col", {
+	animationEnabled: true,
+	theme: "light2", //"light1", "dark1", "dark2"
+	title:{
+		text: "Pipeline of Positions"
+	},
+	data: [{
+		type: "funnel",
+		indexLabelPlacement: "inside",
+		indexLabelFontColor: "white",
+		toolTipContent: "<b>{label}</b>: {y} <b>({percentage}%)</b>",
+		indexLabel: "{label} ({percentage}%)",
+		dataPoints: {{data|safe}}
+	}]
+});
+calculatePercentage();
+chart.render();
+
+function calculatePercentage() {
+	var dataPoint = chart.options.data[0].dataPoints;
+	var total = dataPoint[0].y;
+	for(var i = 0; i < dataPoint.length; i++) {
+		if(i == 0) {
+			chart.options.data[0].dataPoints[i].percentage = 100;
+		} else {
+			chart.options.data[0].dataPoints[i].percentage = ((dataPoint[i].y / total) * 100).toFixed(2);
+		}
+	}
+}
+
+}
+</script>
      <div id="content-wrapper">
 
         <div class="container-fluid">
@@ -44,7 +79,7 @@
                     {{ chart_pie1|safe }}
                 </div> <!-- end col-sm-6 -->
                 <div class="col-xs-6 imgcont" id="port2-second-col">
-                    {{ bar_graph2|safe }}
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
                 </div> <!-- end col-sm-6 -->
 
             </div> <!-- end port-second-row -->
@@ -54,7 +89,7 @@
                     {{ bar_graph1|safe }}
                 </div> <!-- end col-sm-6 -->
                 <div class="col-xs-6 imgcont" id="port2-second-col">
-  <table class="table table-bordered">
+  <table id="example" class="table table-striped table-bordered" style="width:100%">
     <thead>
       <tr>
         <th>Client</th>
