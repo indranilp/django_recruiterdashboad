@@ -50,6 +50,12 @@
 .table-wrapper-scroll-y {
   display: block;
 }
+.table-wrapper-scroll-x {
+  display: block;
+}
+
+.wrapper { overflow-x: auto; }
+.wrapper table { white-space: nowrap }
 </style>
 <html lang="en">
 
@@ -70,9 +76,30 @@
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     
-    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     
     <script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    
+    <!-- Page level plugin JavaScript-->
+    <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+
+    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{% static 'js/sb-admin.min.js' %}"></script>
+
+    <!-- Demo scripts for this page-->
+    <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
+    <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+   <script src="{% static 'js/datetimepicker_css.js' %}"></script>
+	<script src="{% static 'js/bootstrap.min.js' %}"></script>    
+    <!-- Bootstrap core JavaScript-->
+
+    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+
+    <!-- Core plugin JavaScript-->
+    
+
     <!-- Page level plugin CSS-->
     <!--<link href="{% static 'vendor/datatables/dataTables.bootstrap4.css' %}" rel="stylesheet">-->
 
@@ -129,7 +156,7 @@
                             <img border="0" src={{ userobject.picfile.url}} alt="Profile Pic" width="70" height="70">
             {% endif %}
         <li class="nav-item dropdown no-arrow">
-          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-user-circle fa-fw"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
@@ -214,26 +241,14 @@
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
-    <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<div class="modal fade" id="modal-book" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+      </div>
+    </div>
+ </div>
 
-    <!-- Core plugin JavaScript-->
-    <script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
-    <!-- Page level plugin JavaScript-->
-    <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
-    <script src="{% static 'vendor/datatables/jquery.dataTables.js' %}"></script>
-    <script src="{% static 'vendor/datatables/dataTables.bootstrap4.js' %}"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="{% static 'js/sb-admin.min.js' %}"></script>
-
-    <!-- Demo scripts for this page-->
-    <script src="{% static 'js/demo/datatables-demo.js' %}"></script>
-    <script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
-   <script src="{% static 'js/datetimepicker_css.js' %}"></script>
-	<script src="{% static 'js/bootstrap.min.js' %}"></script>
 <script>
     $(document).ready(function(){
       var date_input=$('input[name="birthdate"]'); //our date input has the name "date"
@@ -330,8 +345,61 @@ $(document).ready(function() {
 } );
 </script>   
 
+<script>
+$(function () {
+
+  /* Functions */
+
+  var loadForm = function () {
+    var btn = $(this);     
+    $.ajax({
+      url: btn.attr("data-url"),      
+      type: 'get',
+      dataType: 'json',
+      beforeSend: function () {
+        $("#modal-book").modal("show");
+      },
+      success: function (data) {
+        $("#modal-book .modal-content").html(data.html_form);
+      }
+    });
+  };
+
+  var saveForm = function () {
+    var form = $(this);
+    $.ajax({
+      url: form.attr("action"),
+      data: form.serialize(),
+      type: form.attr("method"),
+      dataType: 'json',
+      success: function (data) {
+        if (data.form_is_valid) {
+          $("#example tbody").html(data.html_book_list);
+          $("#modal-book").modal("hide");
+        }
+        else {
+          $("#modal-book .modal-content").html(data.html_form);
+        }
+      }
+    });
+    return false;
+  };
 
 
+  /* Binding */
+
+
+
+  // Update book
+  $("#example").on("click", ".js-update-book", loadForm);
+  $("#modal-book").on("submit", ".js-book-update-form", saveForm);
+  
+    // Update book
+  $("#example").on("click", ".js-update-book", loadForm);
+  $("#modal-book-resume").on("submit", ".js-book-update-form", saveForm);
+
+});
+</script>
 
 
 

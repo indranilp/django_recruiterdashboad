@@ -14,6 +14,12 @@ import pandas as pd
 from django.contrib.auth.decorators import login_required
 import json
 
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
+from django.template.loader import render_to_string
+from jobs.forms import *
+
+
 current_date = date.today()
 current_month = datetime.now().month
 current_year = datetime.now().year
@@ -678,6 +684,54 @@ def open_requirement(request):
     currentuser = request.session.get('name1')
     return render_to_response('openrequirement.html', {'currentuser': currentuser, 'userobject':Recruiter.objects.get(username=currentuser),'obj': JobDetails.objects.all().exclude(jobstatus='closed')},
                               context_instance=RequestContext(request))
+                              
+def save_book_form(request, form, template_name):    
+    data = dict()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            books = JobDetails.objects.all().exclude(jobstatus='closed')
+            data['html_book_list'] = render_to_string('partial_book_list.html', {
+                'books': books
+            })
+        else:
+            data['form_is_valid'] = False
+    context = {'form': form}
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
+
+def book_update(request, jobid):
+    book = get_object_or_404(JobDetails, pk=jobid)
+    if request.method == 'POST':
+        form = JobDetailsForm(request.POST, instance=book)
+    else:
+        form = JobDetailsForm(instance=book)
+    return save_book_form(request, form, 'partial_book_update.html')   
+
+def save_resume_form(request, form, template_name):    
+    data = dict()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            books = Resume.objects.all()
+            data['html_book_list'] = render_to_string('partial_resume_list.html', {
+                'books': books
+            })
+        else:
+            data['form_is_valid'] = False
+    context = {'form': form}
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
+
+def resume_update(request, candidateemail):
+    book = get_object_or_404(Resume, pk=candidateemail)
+    if request.method == 'POST':
+        form = ResumeDetailsForm(request.POST, instance=book)
+    else:
+        form = ResumeDetailsForm(instance=book)
+    return save_resume_form(request, form, 'partial_resume_update.html')      
                               
 @login_required
 def generate_report(request):

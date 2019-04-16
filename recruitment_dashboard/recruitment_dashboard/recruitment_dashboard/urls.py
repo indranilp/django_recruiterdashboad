@@ -41,5 +41,7 @@ urlpatterns = [
     url(r'^scheduleinterview/$', views.schedule_interview, name='scheduleinterview'),
     url(r'^searchresume/$', views.search_resume, name='searchresume'),
     url(r'^openrequirement/$', views.open_requirement, name='openrequirement'),
+    url(r'^openrequirement/(?P<jobid>\d+)$', views.book_update, name='bookupdate'),
+    url(r'^searchresume/(?P<candidateemail>\w+|[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/$', views.resume_update, name='resumeupdate'),
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

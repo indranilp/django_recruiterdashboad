@@ -1,0 +1,27 @@
+{% for b in books %}
+  <tr>
+      <td>{{b.candidatename}}</td>
+      <td>{{b.candidateemail}}</td>
+      <td>{{b.primaryskill_id}}</td>
+      <td>{{b.submittedby}}</td>
+      <td>{{b.uploaddate}}</td>
+      <td>{{b.resumestatus}}</td>
+      <td>{{b.experience}}</td>
+      <td>{{b.visastatus}}</td>
+      <td>{{b.billrate}}</td>
+      <td>{{b.availability}}</td>
+      <td>{{b.resume}}</td>
+      <td>{{b.remarks}}</td>
+    <td>
+      <button type="button"
+              class="btn btn-warning btn-sm js-update-book"
+              data-url="{% url 'resumeupdate' b.candidatename %}">
+        <span class="glyphicon glyphicon-pencil"></span> Edit
+      </button>
+    </td>
+  </tr>
+{% empty %}
+  <tr>
+    <td colspan="8" class="text-center bg-warning">No book</td>
+  </tr>
+{% endfor %}
