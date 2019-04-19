@@ -24,6 +24,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.login_main, name='login'),
     url(r'logout/$', views.logout, name='logout'),
+    url(r'resetpassword/$', views.reset_password, name='resetpassword'),
     url(r'^adminhome/$', views.admin_home, name='adminhome'),
     url(r'^userhome/$', views.user_home, name='userhome'),
     url(r'^adminlastmonth/$', views.admin_lastmonth, name='adminlastmonth'),

@@ -77,6 +77,22 @@ def login_main(request):
             state = "Invalid User name and/or Password."
     return render_to_response('login.html', {'state': state, 'username': username},
                               context_instance=RequestContext(request))
+                              
+def reset_password(request):
+    state = ''
+    username = password = ''
+    if request.POST:
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        try :
+            u=Recruiter.objects.get(username=username)
+            u.set_password(password)
+            u.save() 
+            state = "Password changed successfully"
+        except Exception as e:
+            state = "User does not exist"                      
+    return render_to_response('resetpassword.html', {'state': state, 'username': username},
+                              context_instance=RequestContext(request))
 
 @login_required                              
 def admin_home(request):
