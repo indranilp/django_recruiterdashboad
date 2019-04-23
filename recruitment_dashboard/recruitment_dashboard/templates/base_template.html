@@ -163,6 +163,7 @@
           {% if currentuser == "admin" %}
             <a class="dropdown-item" href="{% url "editprofile" %}">Edit Profile</a>
             <a class="dropdown-item" href="{% url "createuser" %}">Create User</a>
+            <a class="dropdown-item" href="{% url "addclient" %}">Add Client</a>
             <a class="dropdown-item" href="{% url "addvendor" %}">Add Vendor</a>
             <a class="dropdown-item" href="{% url "addskills" %}">Add Skills</a>
             <a class="dropdown-item" href="{% url "createjob" %}">Create Job</a>
@@ -339,6 +340,41 @@ function Call2()
 	
 	}
 	  </script>
+      
+      
+	<script>
+function Call4()
+	{
+		
+            
+			selectedval = document.getElementById("clientname").value;
+            selectjobdescription = document.getElementById("jobrole");
+            selectjobdescription.innerHTML = "";
+			{% for b in obj3 %}
+				 var json = "{{b.clientname_id}}".replace(/&quot;/g,"\"")
+                 
+				 if(selectedval==json)
+				 {
+                        selectedval.innerHTML = "";
+                        // Populate list with options:
+ 
+                            
+                            var opt = "{{b.jobrole}}".replace(/&quot;/g,"\"");
+                            
+                            
+                            
+                            var el = document.createElement("option");
+                                el.text = opt;
+                                el.value = opt;
+                                selectjobdescription.add(el);
+					
+				 }
+				 
+			{% endfor %}
+			return true;
+	
+	}
+	  </script>      
 <script>      
 $(document).ready(function() {
     $('#example').DataTable();

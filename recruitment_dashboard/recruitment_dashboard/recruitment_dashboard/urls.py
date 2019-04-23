@@ -31,6 +31,7 @@ urlpatterns = [
     url(r'^userlastmonth/$', views.user_lastmonth, name='userlastmonth'),    
     url(r'^editprofile/$', views.edit_profile, name='editprofile'),
     url(r'^createuser/$', views.create_user, name='createuser'),
+    url(r'^addclient/$', views.add_client, name='addclient'),
     url(r'^addvendor/$', views.add_vendor, name='addvendor'),
     url(r'^addskills/$', views.add_skills, name='addskills'),
     url(r'^createjob/$', views.create_job, name='createjob'),

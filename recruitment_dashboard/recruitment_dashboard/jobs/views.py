@@ -565,6 +565,22 @@ def add_vendor(request):
                                       context_instance=RequestContext(request))
     return render_to_response ('addvendor.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser)},context_instance=RequestContext(request))
 
+    
+@login_required
+def add_client(request):
+    currentuser = request.session.get('name1')
+    if request.POST:
+        try :
+                clientname = request.POST.get('clientname')
+                Client.objects.create(clientname=clientname)
+                return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Client created successfully"},
+                                      context_instance=RequestContext(request))
+        except Exception as error:
+            return render_to_response('error.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'error': error},
+                                      context_instance=RequestContext(request))
+    return render_to_response ('addclient.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser)},context_instance=RequestContext(request))
+
+    
 @login_required    
 def add_skills(request):
     currentuser = request.session.get('name1')
@@ -584,20 +600,23 @@ def create_job(request):
     currentuser = request.session.get('name1')
     if request.POST:
         try :
+                
                 vendorname = request.POST.get('vendorname')
+                clientname = request.POST.get('clientname')
                 jobrole = request.POST.get('jobrole')
                 jobdescription = request.POST.get('jobdescription')
                 contracttype = request.POST.get('contracttype')
                 clientrate = request.POST.get('clientrate')
                 visapreference = request.POST.get('visapreference')
-                vendorobj = Vendor.objects.get(vendorname=vendorname)    
-                JobDetails.objects.create(vendorname=vendorobj,jobrole=jobrole,contracttype=contracttype,clientrate=clientrate,visapreference=visapreference,jobdescription=jobdescription,jobstatus='open',assignedto='none',jobcreatedate=date.today())
+                vendorobj = Vendor.objects.get(vendorname=vendorname)
+                clientobj = Client.objects.get(clientname=clientname)
+                JobDetails.objects.create(vendorname=vendorobj,clientname=clientobj,jobrole=jobrole,contracttype=contracttype,clientrate=clientrate,visapreference=visapreference,jobdescription=jobdescription,jobstatus='open',assignedto='none',jobcreatedate=date.today())
                 return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Job created successfully"},
                                       context_instance=RequestContext(request))
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('createjob.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'obj':Vendor.objects.all()},context_instance=RequestContext(request))
+    return render_to_response ('createjob.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'obj':Vendor.objects.all(),'clientobj':Client.objects.all()},context_instance=RequestContext(request))
 
 @login_required    
 def assign_job(request):
@@ -617,7 +636,7 @@ def assign_job(request):
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('assignjob.html',{'currentuser': currentuser,'obj':JobDetails.objects.filter(jobstatus='open').values('vendorname').distinct(),'obj1':JobDetails.objects.filter(jobstatus='open').values('jobrole').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all().filter(jobstatus='open')},context_instance=RequestContext(request))
+    return render_to_response ('assignjob.html',{'currentuser': currentuser,'obj':JobDetails.objects.filter(jobstatus='open').values('vendorname').distinct(),'clientobj':JobDetails.objects.filter(jobstatus='open').values('clientname').distinct(),'obj1':JobDetails.objects.filter(jobstatus='open').values('jobrole').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all().filter(jobstatus='open')},context_instance=RequestContext(request))
 
 @login_required    
 def change_job_status(request):

@@ -11,6 +11,16 @@
 {% csrf_token %}    
  
 <div class="form-group">
+<label for="FormControlTextarea1">Client Name</label>
+<select class="custom-select" name="clientname" id="clientname" onchange="return Call4();"style="text-align:right;" required="">
+<option value="">Select Client</option>
+{% for b in clientobj %}
+<option value="{{ b.clientname}}">{{ b.clientname}}</option>
+{% endfor %}
+</select>
+</div> 
+
+<div class="form-group">
 <label for="FormControlTextarea1">Vendor Name</label>
 <select class="custom-select" name="vendorname" id="vendorname" onchange="return Call2();"style="text-align:right;" required="">
 <option value="">Select Vendor</option>

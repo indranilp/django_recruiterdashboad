@@ -10,12 +10,16 @@ class Recruiter(AbstractUser):
     designation = models.CharField(max_length=30, blank=True)
     picfile = models.ImageField(upload_to='documents/%Y/%m/%d')
     birthdate = models.DateField(null=True,blank=True)
+    
+class Client(models.Model):
+    clientname=models.CharField(max_length=200,primary_key=True)    
 
 class Vendor(models.Model):
     vendorname=models.CharField(max_length=200,primary_key=True)
 
 class JobDetails(models.Model):
     jobid = models.IntegerField(primary_key=True)
+    clientname=models.ForeignKey(Client, on_delete=models.CASCADE)
     vendorname=models.ForeignKey(Vendor, on_delete=models.CASCADE)
     jobrole = models.CharField(max_length=200, null=True, blank=True)
     contracttype = models.CharField(max_length=200,null=True,blank=True)
