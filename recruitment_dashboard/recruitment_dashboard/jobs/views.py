@@ -123,7 +123,7 @@ def admin_home(request):
     
     cursor = connection.cursor()
     
-    cursor.execute('''SELECT count("jobs_jobdetails"."vendorname_id"), "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole", "jobs_jobdetails"."assignedto" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") WHERE strftime('%%m',"jobs_jobdetails"."jobcreatedate") = (%s) AND strftime('%%Y',"jobs_jobdetails"."jobcreatedate") = (%s) GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole", "jobs_jobdetails"."assignedto"''',(date.today().strftime('%m'),date.today().strftime('%Y')))
+    cursor.execute('''SELECT count("jobs_jobdetails"."vendorname_id"), "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobtitle", "jobs_jobdetails"."assignedto" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") WHERE strftime('%%m',"jobs_jobdetails"."jobcreatedate") = (%s) AND strftime('%%Y',"jobs_jobdetails"."jobcreatedate") = (%s) GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobtitle", "jobs_jobdetails"."assignedto"''',(date.today().strftime('%m'),date.today().strftime('%Y')))
     
     rows = cursor.fetchall()
 
@@ -208,7 +208,7 @@ def admin_lastmonth(request):
 
     cursor = connection.cursor()
 
-    cursor.execute('''SELECT count("jobs_jobdetails"."vendorname_id"), "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole", "jobs_jobdetails"."assignedto" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") WHERE strftime('%%m',"jobs_jobdetails"."jobcreatedate") = (%s) AND strftime('%%Y',"jobs_jobdetails"."jobcreatedate") = (%s) GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole", "jobs_jobdetails"."assignedto"''',(same_day_last_month.strftime('%m'),same_day_last_month.strftime('%Y')))
+    cursor.execute('''SELECT count("jobs_jobdetails"."vendorname_id"), "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobtitle", "jobs_jobdetails"."assignedto" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") WHERE strftime('%%m',"jobs_jobdetails"."jobcreatedate") = (%s) AND strftime('%%Y',"jobs_jobdetails"."jobcreatedate") = (%s) GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobtitle", "jobs_jobdetails"."assignedto"''',(same_day_last_month.strftime('%m'),same_day_last_month.strftime('%Y')))
     
     
     rows = cursor.fetchall()
@@ -291,7 +291,7 @@ def generate_chart(request):
         
         cursor = connection.cursor()
 
-        cursor.execute('''SELECT count("jobs_interview"."interviewstatus"), "jobs_interview"."interviewstatus","jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole", "jobs_jobdetails"."jobstatus", "jobs_jobdetails"."jobcreatedate", "jobs_jobdetails"."assignedto" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") WHERE "jobs_jobdetails"."jobcreatedate" >= (%s) AND "jobs_jobdetails"."jobcreatedate" <= (%s) GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole","jobs_interview"."interviewstatus"''',(datetime.strptime(startdate, '%m/%d/%Y').strftime('%Y-%m-%d'),datetime.strptime(enddate, '%m/%d/%Y').strftime('%Y-%m-%d')))
+        cursor.execute('''SELECT count("jobs_interview"."interviewstatus"), "jobs_interview"."interviewstatus","jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobtitle", "jobs_jobdetails"."jobstatus", "jobs_jobdetails"."jobcreatedate", "jobs_jobdetails"."assignedto" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") WHERE "jobs_jobdetails"."jobcreatedate" >= (%s) AND "jobs_jobdetails"."jobcreatedate" <= (%s) GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobtitle","jobs_interview"."interviewstatus"''',(datetime.strptime(startdate, '%m/%d/%Y').strftime('%Y-%m-%d'),datetime.strptime(enddate, '%m/%d/%Y').strftime('%Y-%m-%d')))
         rows = cursor.fetchall()
 
         final_dict1={}
@@ -319,13 +319,13 @@ def generate_chart(request):
             for key,values in final_dict1.items():
                 final_list.append([key[0],key[1],key[2],values[0],values[1],values[2],values[3],values[4],values[5]])
 
-            columnnames = ['client','jobrole','jobstatus','assign','date','source','screen','select','reject']
+            columnnames = ['client','jobtitle','jobstatus','assign','date','source','screen','select','reject']
             df = pd.DataFrame.from_dict(final_list)
             df.columns = columnnames
             df['date'] = pd.to_datetime(df['date'])
             df.set_index(df["date"],inplace=True)
 
-            df1=df.groupby(['client','jobrole','assign','jobstatus']).resample('D').sum()
+            df1=df.groupby(['client','jobtitle','assign','jobstatus']).resample('D').sum()
             if reporttype == 'daily':
                 df2=df.groupby(['assign','jobstatus']).resample('D').sum()
             elif reporttype == 'weekly':
@@ -603,14 +603,15 @@ def create_job(request):
                 
                 vendorname = request.POST.get('vendorname')
                 clientname = request.POST.get('clientname')
-                jobrole = request.POST.get('jobrole')
+                jobtitle = request.POST.get('jobtitle')
                 jobdescription = request.POST.get('jobdescription')
                 contracttype = request.POST.get('contracttype')
-                clientrate = request.POST.get('clientrate')
+                billrate = request.POST.get('billrate')
                 visapreference = request.POST.get('visapreference')
+                location = request.POST.get('location')
                 vendorobj = Vendor.objects.get(vendorname=vendorname)
                 clientobj = Client.objects.get(clientname=clientname)
-                JobDetails.objects.create(vendorname=vendorobj,clientname=clientobj,jobrole=jobrole,contracttype=contracttype,clientrate=clientrate,visapreference=visapreference,jobdescription=jobdescription,jobstatus='open',assignedto='none',jobcreatedate=date.today())
+                JobDetails.objects.create(vendorname=vendorobj,clientname=clientobj,jobtitle=jobtitle,contracttype=contracttype,billrate=billrate,visapreference=visapreference,jobdescription=jobdescription,jobstatus='open',assignedto='none',jobcreatedate=date.today(),location=location)
                 return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Job created successfully"},
                                       context_instance=RequestContext(request))
         except Exception as error:
@@ -624,19 +625,20 @@ def assign_job(request):
     if request.POST:
         try :
                 vendorname = request.POST.get('vendorname')
-                jobrole = request.POST.get('jobrole')
+                clientname = request.POST.get('clientname')
+                jobtitle = request.POST.get('jobtitle')
                 username = request.POST.get('username')
-                #print(vendorname,jobrole,username)
                 vendorobj = Vendor.objects.get(vendorname=vendorname)
-                res1=JobDetails.objects.filter(vendorname_id=vendorname).filter(jobrole=jobrole).update(jobstatus='assigned')
-                JobDetails.objects.filter(vendorname_id=vendorname).filter(jobrole=jobrole).update(
+                clientobj = Client.objects.get(clientname=clientname)
+                res1=JobDetails.objects.filter(clientname_id=clientname).filter(vendorname_id=vendorname).filter(jobtitle=jobtitle).update(jobstatus='assigned')
+                JobDetails.objects.filter(clientname_id=clientname).filter(vendorname_id=vendorname).filter(jobtitle=jobtitle).update(
                     assignedto=username)
                 return render_to_response('success.html',{'currentuser': currentuser,'obj1':Recruiter.objects.get(username=currentuser),'success': "Job assigned successfully to Recruiter " + username},
                                       context_instance=RequestContext(request))
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('assignjob.html',{'currentuser': currentuser,'obj':JobDetails.objects.filter(jobstatus='open').values('vendorname').distinct(),'clientobj':JobDetails.objects.filter(jobstatus='open').values('clientname').distinct(),'obj1':JobDetails.objects.filter(jobstatus='open').values('jobrole').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all().filter(jobstatus='open')},context_instance=RequestContext(request))
+    return render_to_response ('assignjob.html',{'currentuser': currentuser,'obj':JobDetails.objects.filter(jobstatus='open').values('vendorname').distinct(),'clientobj':JobDetails.objects.filter(jobstatus='open').values('clientname').distinct(),'obj1':JobDetails.objects.filter(jobstatus='open').values('jobtitle').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all().filter(jobstatus='open')},context_instance=RequestContext(request))
 
 @login_required    
 def change_job_status(request):
@@ -644,17 +646,20 @@ def change_job_status(request):
     if request.POST:
         try :
                 vendorname = request.POST.get('vendorname')
-                jobrole = request.POST.get('jobrole')
+                clientname = request.POST.get('clientname')
+                jobtitle = request.POST.get('jobtitle')
                 jobstatus = request.POST.get('jobstatus')
-                #print(vendorname,jobrole,jobstatus)
-                result=JobDetails.objects.filter(vendorname_id=vendorname).filter(jobrole=jobrole).update(jobstatus=jobstatus)
-                #print(result)
+                vendorobj = Vendor.objects.get(vendorname=vendorname)
+                clientobj = Client.objects.get(clientname=clientname)
+                print(vendorname,clientname,jobtitle,jobstatus)
+                result=JobDetails.objects.filter(clientname_id=clientname).filter(vendorname_id=vendorname).filter(jobtitle=jobtitle).update(jobstatus=jobstatus)
+                print(result)
                 return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Job status changed successfully to  " + jobstatus},
                                       context_instance=RequestContext(request))
         except Exception as error:
             return render_to_response('error.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'error': error},
                                       context_instance=RequestContext(request))
-    return render_to_response ('changejobstatus.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'obj':JobDetails.objects.values('vendorname').distinct(),'obj1':JobDetails.objects.values('jobrole').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all()},context_instance=RequestContext(request))
+    return render_to_response ('changejobstatus.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'obj':JobDetails.objects.values('vendorname').distinct(),'clientobj':JobDetails.objects.values('clientname').distinct(),'obj1':JobDetails.objects.values('jobtitle').distinct(),'obj2':Recruiter.objects.all().exclude(username='admin'),'obj3':JobDetails.objects.all()},context_instance=RequestContext(request))
     
 @login_required
 def upload_resume(request):
@@ -666,13 +671,13 @@ def upload_resume(request):
                 skillname = request.POST.get('skillname')
                 experience = request.POST.get('experience')
                 visastatus = request.POST.get('visastatus')
-                billrate = request.POST.get('billrate')
+                buyrate = request.POST.get('buyrate')
                 availability = request.POST.get('availability')
                 remarks = request.POST.get('remarks')
                 #resume = request.POST.get('inputGroupFile01')
                 recruiterobj = Recruiter.objects.get(username=currentuser)
                 skillobj=TechnicalSkills.objects.get(primaryskill=skillname)
-                Resume.objects.create(candidateemail=candidateemail,candidatename=candidatename,primaryskill=skillobj,resume=request.FILES['inputGroupFile01'],uploaddate=date.today(),resumestatus="submitted",submittedby=recruiterobj,experience=experience,visastatus=visastatus,billrate=billrate,availability=availability,remarks=remarks)
+                Resume.objects.create(candidateemail=candidateemail,candidatename=candidatename,primaryskill=skillobj,resume=request.FILES['inputGroupFile01'],uploaddate=date.today(),resumestatus="submitted",submittedby=recruiterobj,experience=experience,visastatus=visastatus,buyrate=buyrate,availability=availability,remarks=remarks)
                 return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Resume uploaded successfully"},
                                       context_instance=RequestContext(request))
         except Exception as error:
@@ -685,14 +690,15 @@ def schedule_interview(request):
     currentuser = request.session.get('name1')
     if request.POST:
         try :
-                jobrole = request.POST.get('jobrole')
+                jobtitle = request.POST.get('jobtitle')
+                clientname = request.POST.get('clientname')
                 vendorname = request.POST.get('vendorname')
                 candidateemail = request.POST.get('candidateemail')                
                 interviewdate = request.POST.get('startdate')
                 temp_date=datetime.strptime(interviewdate, "%m/%d/%Y").date()
                 interviewstatus = request.POST.get('interviewstatus')
                 resumeobj = Resume.objects.get(candidateemail=candidateemail)
-                jobobj = JobDetails.objects.get(vendorname=vendorname,jobrole=jobrole)                
+                jobobj = JobDetails.objects.get(vendorname=vendorname,jobtitle=jobtitle)                
                 Interview.objects.create(jobid=jobobj,candidateemail=resumeobj,interviewdate=temp_date,interviewstatus=interviewstatus)
                 return render_to_response('success.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'success': "Interview scheduled for " + candidateemail},
                                       context_instance=RequestContext(request))
@@ -706,7 +712,7 @@ def schedule_interview(request):
                                                         assignedto=currentuser).values('positionname').distinct()},
                               context_instance=RequestContext(request))'''
 
-    return render_to_response ('scheduleinterview.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'obj1':Recruiter.objects.get(username=currentuser),'obj2':Resume.objects.all(),'obj3':JobDetails.objects.all().filter(assignedto=currentuser)},context_instance=RequestContext(request))
+    return render_to_response ('scheduleinterview.html',{'currentuser': currentuser,'userobject':Recruiter.objects.get(username=currentuser),'obj1':Recruiter.objects.get(username=currentuser),'obj10':JobDetails.objects.all().filter(assignedto=currentuser).exclude(jobstatus='closed').values('vendorname').distinct(),'clientobj':JobDetails.objects.all().filter(assignedto=currentuser).exclude(jobstatus='closed').values('clientname').distinct(),'obj2':Resume.objects.all(),'obj3':JobDetails.objects.all().filter(assignedto=currentuser).exclude(jobstatus='closed')},context_instance=RequestContext(request))
 
 @login_required
 def search_resume(request):
@@ -779,7 +785,7 @@ def generate_report(request):
                 
         cursor = connection.cursor()
 
-        cursor.execute('''SELECT count("jobs_interview"."interviewstatus"), "jobs_interview"."interviewstatus","jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole", "jobs_jobdetails"."jobstatus", "jobs_jobdetails"."jobcreatedate", "jobs_jobdetails"."assignedto" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") WHERE "jobs_jobdetails"."jobcreatedate" >= (%s) AND "jobs_jobdetails"."jobcreatedate" <= (%s) GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobrole","jobs_interview"."interviewstatus"''',(datetime.strptime(startdate, '%m/%d/%Y').strftime('%Y-%m-%d'),datetime.strptime(enddate, '%m/%d/%Y').strftime('%Y-%m-%d')))
+        cursor.execute('''SELECT count("jobs_interview"."interviewstatus"), "jobs_interview"."interviewstatus","jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobtitle", "jobs_jobdetails"."jobstatus", "jobs_jobdetails"."jobcreatedate", "jobs_jobdetails"."assignedto" FROM "jobs_jobdetails" LEFT OUTER JOIN "jobs_interview" ON ("jobs_jobdetails"."jobid" = "jobs_interview"."jobid_id") WHERE "jobs_jobdetails"."jobcreatedate" >= (%s) AND "jobs_jobdetails"."jobcreatedate" <= (%s) GROUP BY "jobs_jobdetails"."vendorname_id", "jobs_jobdetails"."jobtitle","jobs_interview"."interviewstatus"''',(datetime.strptime(startdate, '%m/%d/%Y').strftime('%Y-%m-%d'),datetime.strptime(enddate, '%m/%d/%Y').strftime('%Y-%m-%d')))
         rows = cursor.fetchall()
 
         final_dict1={}
@@ -807,13 +813,13 @@ def generate_report(request):
             for key,values in final_dict1.items():
                 final_list.append([key[0],key[1],key[2],values[0],values[1],values[2],values[3],values[4],values[5]])
 
-            columnnames = ['client','jobrole','jobstatus','assign','date','source','screen','select','reject']
+            columnnames = ['client','jobtitle','jobstatus','assign','date','source','screen','select','reject']
             df = pd.DataFrame.from_dict(final_list)
             df.columns = columnnames
             df['date'] = pd.to_datetime(df['date'])
             df.set_index(df["date"],inplace=True)
 
-            df1=df.groupby(['client','jobrole','assign','jobstatus']).resample('D').sum()
+            df1=df.groupby(['client','jobtitle','assign','jobstatus']).resample('D').sum()
             if reporttype == 'daily':
                 df2=df.groupby(['assign','jobstatus']).resample('D').sum()
             elif reporttype == 'weekly':

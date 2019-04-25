@@ -22,16 +22,22 @@
       <th class="th-sm">Job Id
 
       </th>    
+      <th class="th-sm">Job Title
+
+      </th>
+      <th class="th-sm">Location
+
+      </th>  
+      <th class="th-sm">Client Name
+
+      </th>      
       <th class="th-sm">Vendor Name
 
       </th>
-      <th class="th-sm">Job Role
+      <th class="th-sm">Bill Rate
 
       </th>
       <th class="th-sm">Contract Type
-
-      </th>
-      <th class="th-sm">Client Rate
 
       </th>
       <th class="th-sm">Visa Preference
@@ -52,10 +58,12 @@
 {% for b in obj %}  
     <tr>
       <td>{{b.jobid}}</td>
+      <td>{{b.jobtitle}}</td>
+      <td>{{b.location}}</td>
+      <td>{{b.clientname_id}}</td>
       <td>{{b.vendorname_id}}</td>
-      <td>{{b.jobrole}}</td>
-      <td>{{b.contracttype}}</td>
-      <td>{{b.clientrate}}</td>
+      <td>{{b.billrate}}</td>
+      <td>{{b.contracttype}}</td>      
       <td>{{b.visapreference}}</td>
       <td>{{b.jobcreatedate}}</td>
       <td>{{b.assignedto}}</td> 

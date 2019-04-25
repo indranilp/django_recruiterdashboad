@@ -1,10 +1,12 @@
 {% for b in books %}
   <tr>
       <td>{{b.jobid}}</td>
+      <td>{{b.jobtitle}}</td>
+      <td>{{b.location}}</td>
+      <td>{{b.clientname_id}}</td>
       <td>{{b.vendorname_id}}</td>
-      <td>{{b.jobrole}}</td>
-      <td>{{b.contracttype}}</td>
-      <td>{{b.clientrate}}</td>
+      <td>{{b.billrate}}</td>
+      <td>{{b.contracttype}}</td>      
       <td>{{b.visapreference}}</td>
       <td>{{b.jobcreatedate}}</td>
       <td>{{b.assignedto}}</td> 

@@ -3,7 +3,7 @@
 
       <div id="content-wrapper">
 
-        <div class="container-fluid">
+        <div class="two-column-div">
 
         
           <!-- Breadcrumbs-->
@@ -12,14 +12,24 @@
 {% csrf_token %}    
  
    <div class="form-group">
-    <label for="exampleInputEmail1">candidate Email address</label>
+    <label for="FormControlTextarea1">Candidate Name</label>
+    <input type="text" class="form-control" id="candidatename"  name="candidatename">
+  </div>   
+  
+   <div class="form-group">
+    <label for="exampleInputEmail1">Candidate Email address</label>
     <input type="email" class="form-control" id="candidateemail" name="candidateemail" aria-describedby="emailHelp" placeholder="Enter email">
   </div>
   
   <div class="form-group">
-    <label for="FormControlTextarea1">Candidate Name</label>
-    <input type="text" class="form-control" id="candidatename"  name="candidatename">
-  </div>     
+  <label for="example-tel-input">Telephone Number</label>
+    <input class="form-control" type="tel" value="1-(555)-555-5555" id="contactnumber" name="contactnumber">
+</div>
+  
+     <div class="form-group">
+    <label for="FormControlTextarea1">Skype ID</label>
+    <input type="text" class="form-control" id="skypeid"  name="skypeid">
+  </div>  
   
 <div class="form-group">    
 <label for="FormControlTextarea1">Technical Skills</label>    
@@ -38,20 +48,22 @@
     <div class="form-group">
     <label for="FormControlTextarea1">Visa Status</label>
     <input type="text" class="form-control" id="visastatus"  name="visastatus">
-  </div>    
+  </div>     
   
     <div class="form-group">
-    <label for="FormControlTextarea1">Bill Rate</label>
-    <input type="text" class="form-control" id="billrate"  name="billrate">
+    <label for="FormControlTextarea1">Buy Rate</label>
+    <input type="text" class="form-control" id="buyrate"  name="buyrate">
   </div>    
   
     <div class="form-group">    
     <label for="FormControlTextarea1">Availability</label>    
     <select class="custom-select" name="availability" id="availability" style="text-align:right;" required="">
     <option value="">Select Availability</option>
-
-    <option value="open">yes</option>
-    <option value="closed">no</option>
+    <option value="immediate">immediate</option>
+    <option value="1week">1week</option>
+    <option value="2week">2week</option>
+    <option value="yes">yes</option>
+    <option value="no">no</option>
     </select>
     </div>   
     
@@ -71,7 +83,7 @@
   <div class="input-group-prepend">
     <span class="input-group-text">Remarks</span>
   </div>
-  <textarea class="form-control" aria-label="Remarks" id="remarks"  name="remarks"></textarea>
+  <textarea class="form-control" aria-label="Remarks" id="remarks"  name="remarks" cols="20" rows="10"></textarea>
 </div>  
                 
   

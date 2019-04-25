@@ -2,7 +2,7 @@
 {% block content %}
       <div id="content-wrapper">
 
-        <div class="container-fluid">
+        <div class="two-column-div">
 
         
           <!-- Breadcrumbs-->
@@ -36,34 +36,43 @@ function drawChart() {
 }
 </script>
 
-
+<div class="form-group">
+<label for="FormControlTextarea1">Client Name</label>
+<select class="custom-select" name="clientname" id="clientname" onchange="return Call4();"style="text-align:right;" required="">
+<option value="">Select Client</option>
+{% for b in clientobj %}
+<option value="{{ b.clientname}}">{{ b.clientname}}</option>
+{% endfor %}
+</select>
+</div> 
    
 <div class="form-group">
 <label for="FormControlTextarea1">Vendor Name</label>
 <select class="custom-select" name="vendorname" id="vendorname" onchange="return Call2();"style="text-align:right;" required="">
 <option value="">Select Vendor</option>
-{% for b in obj3 %}
-<option value="{{ b.vendorname_id}}">{{ b.vendorname_id}}</option>
+{% for b in obj10 %}
+<option value="{{ b.vendorname}}">{{ b.vendorname}}</option>
 {% endfor %}
 </select>
 </div> 
          
 <div class="form-group">    
-<label for="FormControlTextarea1">Job Role</label>    
-<select class="custom-select" name="jobrole" id="jobrole" style="text-align:right;" required="">
-<option value="">Select Job Role</option>
+<label for="FormControlTextarea1">Job Title</label>    
+<select class="custom-select" name="jobtitle" id="jobtitle" style="text-align:right;" required="">
+<option value="">Select Job Title</option>
 </select>
 </div> 
-                
+      
 <div class="form-group">    
-<label for="FormControlTextarea1">Candidate Email</label>    
+<label for="exampleInputEmail1">Candidate Email Address</label>    
 <select class="custom-select" name="candidateemail" id="candidateemail" style="text-align:right;" required="">
-<option value="">Select Candidate</option>
+<option value="">Select Candidate Email Address</option>
 {% for y in obj2 %}
 <option value="{{ y.candidateemail}}">{{ y.candidateemail}}</option>
 {% endfor %}
 </select>
 </div>    
+      
 
      <div class="form-group"> <!-- Date input -->
         <label class="control-label" for="date">Interview Date</label>
@@ -74,12 +83,12 @@ function drawChart() {
 <div class="form-group">    
 <label for="FormControlTextarea1">Interview Round</label>    
 <select class="custom-select" name="interviewstatus" id="interviewstatus" style="text-align:right;" required="">
-<option value="">Select Round</option>
+<option value="">Select Interview Type</option>
 
-<option value="round1">round1</option>
-<option value="round2">round2</option>
-<option value="selected">selected</option>
-<option value="rejected">rejected</option>
+<option value="round1">skype</option>
+<option value="round2">inperson</option>
+<option value="selected">telephonic</option>
+<option value="rejected">webex</option>
 </select>
 </div>    
 

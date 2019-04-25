@@ -4,10 +4,10 @@ from .models import *
 class JobDetailsForm(forms.ModelForm):
     class Meta:
         model = JobDetails
-        fields = ('jobid', 'jobrole', 'contracttype', 'clientrate', 'visapreference','jobcreatedate','assignedto','jobstatus',)
+        fields = ('jobid', 'jobtitle', 'contracttype', 'billrate', 'visapreference','jobcreatedate','assignedto','jobstatus',)
 
         
 class ResumeDetailsForm(forms.ModelForm):
     class Meta:
         model = Resume
-        fields = ('candidateemail', 'candidatename', 'resumestatus',)        
+        fields = ('candidateemail', 'candidatename', 'availability','resumestatus',)        

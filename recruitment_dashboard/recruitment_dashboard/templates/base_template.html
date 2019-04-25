@@ -56,6 +56,10 @@
 
 .wrapper { overflow-x: auto; }
 .wrapper table { white-space: nowrap }
+
+.two-column-div {
+ column-count: 2;
+}
 </style>
 <html lang="en">
 
@@ -313,7 +317,7 @@ function Call2()
 		
             
 			selectedval = document.getElementById("vendorname").value;
-            selectjobdescription = document.getElementById("jobrole");
+            selectjobdescription = document.getElementById("jobtitle");
             selectjobdescription.innerHTML = "";
 			{% for b in obj3 %}
 				 var json = "{{b.vendorname_id}}".replace(/&quot;/g,"\"")
@@ -324,7 +328,7 @@ function Call2()
                         // Populate list with options:
  
                             
-                            var opt = "{{b.jobrole}}".replace(/&quot;/g,"\"");
+                            var opt = "{{b.jobtitle}}".replace(/&quot;/g,"\"");
                             
                             
                             
@@ -348,7 +352,7 @@ function Call4()
 		
             
 			selectedval = document.getElementById("clientname").value;
-            selectjobdescription = document.getElementById("jobrole");
+            selectjobdescription = document.getElementById("jobtitle");
             selectjobdescription.innerHTML = "";
 			{% for b in obj3 %}
 				 var json = "{{b.clientname_id}}".replace(/&quot;/g,"\"")
@@ -359,7 +363,7 @@ function Call4()
                         // Populate list with options:
  
                             
-                            var opt = "{{b.jobrole}}".replace(/&quot;/g,"\"");
+                            var opt = "{{b.jobtitle}}".replace(/&quot;/g,"\"");
                             
                             
                             
@@ -375,6 +379,10 @@ function Call4()
 	
 	}
 	  </script>      
+      
+      
+   
+      
 <script>      
 $(document).ready(function() {
     $('#example').DataTable();
