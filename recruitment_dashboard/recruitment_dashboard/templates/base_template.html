@@ -60,6 +60,16 @@
 .two-column-div {
  column-count: 2;
 }
+
+.tooltip-inner {
+    max-width: 350px;
+}
+
+.tooltip-inner {
+ word-break: break-all;
+}
+
+
 </style>
 <html lang="en">
 
@@ -73,6 +83,7 @@
 
     <title>Recruiter - Dashboard</title>
     
+
 
     <!-- Bootstrap core CSS-->
     <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
@@ -109,7 +120,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{% static 'css/sb-admin.css' %}" rel="stylesheet">
-    
+
 
     
     
@@ -388,6 +399,27 @@ $(document).ready(function() {
     $('#example').DataTable();
 } );
 </script>   
+
+<script>
+$(document).ready(function(){
+  $('[data-toggle="popover"]').popover(); 
+});
+</script>
+<script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip(); 
+});
+</script>
+
+<script>
+$(document).ready(function () {
+  $("a").tooltip({
+    'selector': '',
+    'placement': 'top',
+    'container':'body'
+  });
+});
+</script>
 
 <script>
 $(function () {

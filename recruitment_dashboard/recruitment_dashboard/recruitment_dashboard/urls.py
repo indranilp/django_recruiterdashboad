@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls))
 """
-from django.conf.urls import url
+from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from jobs import views
 from django.conf.urls.static import static
@@ -45,5 +45,5 @@ urlpatterns = [
     url(r'^openrequirement/$', views.open_requirement, name='openrequirement'),
     url(r'^openrequirement/(?P<jobid>\d+)$', views.book_update, name='bookupdate'),
     url(r'^searchresume/(?P<candidateemail>\w+|[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/$', views.resume_update, name='resumeupdate'),
-
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

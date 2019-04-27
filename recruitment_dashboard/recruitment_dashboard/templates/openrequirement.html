@@ -58,7 +58,11 @@
 {% for b in obj %}  
     <tr>
       <td>{{b.jobid}}</td>
-      <td>{{b.jobtitle}}</td>
+      <td>
+      {% autoescape on %}
+      <a rel="tooltip" title='{{b.jobdescription|linebreaksbr}}'>{{b.jobtitle}}</a>
+      {% endautoescape %}
+      </td>
       <td>{{b.location}}</td>
       <td>{{b.clientname_id}}</td>
       <td>{{b.vendorname_id}}</td>
