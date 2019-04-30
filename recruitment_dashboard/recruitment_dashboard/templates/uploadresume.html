@@ -1,13 +1,6 @@
 {% extends "base_template.html" %}
 {% block content %}
-
-      <div id="content-wrapper">
-
-        <div class="two-column-div">
-
-        
-          <!-- Breadcrumbs-->
-          <ol class="breadcrumb">   
+   
 <form id="contactform" method="post" enctype="multipart/form-data">
 {% csrf_token %}    
  
@@ -89,22 +82,5 @@
   
 <br>
   <button type="submit" class="btn btn-primary">Submit</button>
-</form     
-          </ol>
-
-    
-        </div>
-        <!-- /.container-fluid -->
-
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
-            </div>
-          </div>
-        </footer>
-
-      </div>
-      <!-- /.content-wrapper -->
+</form>     
 {% endblock content %}      

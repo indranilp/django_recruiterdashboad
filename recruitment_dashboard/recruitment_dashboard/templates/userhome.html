@@ -1,44 +1,50 @@
 {% extends "base_template.html" %}
 {% block content %}
+
      <div id="content-wrapper">
 
         <div class="container-fluid">
+        
+                <!-- Buttons  -->
+                <div class="row">
+                    <div class="col-lg-3 col-md-6">
+                    {% if currentuser == "admin" %}
 
-          <!-- Breadcrumbs-->
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">
-                  {% if currentuser == "admin" %}
-      <a href="{% url "adminhome" %}" class="btn btn-info" role="button">Current Month</a>                        
-      {% else %}
-      <a href="{% url "userhome" %}" class="btn btn-info" role="button">Current Month</a> 
-      {% endif %}
-      {% if currentuser == "admin" %}
-      <a href="{% url "adminlastmonth" %}" class="btn btn-info" role="button">Last Month</a>
-      {% else %}
-     <a href="{% url "userlastmonth" %}" class="btn btn-info" role="button">Last Month</a>
-      {% endif %}
-            </li>    
-          </ol>
+                       <a href="{% url "adminhome" %}" class="btn btn-primary btn-lg btn-block" role="button">Current Month</a>
+                    {% else %}
+                       <a href="{% url "userhome" %}" class="btn btn-primary btn-lg btn-block" role="button">Current Month</a>                                      
+                    {% endif %}
+                    </div>
 
- 
-          <!-- Icon Cards-->
-          <div class="row">
-            <div class="col-xl-3 col-sm-6 mb-3">
-              <div class="card text-white bg-primary o-hidden h-100">
-                <div class="card-body">
-                  <div class="card-body-icon">
-                    <i class="fas fa-fw fa-comments"></i>
-                  </div>
-                  <div class="mr-5">Total Closure {{closejobcount}}</div>
+                    <div class="col-lg-3 col-md-6">
+                      {% if currentuser == "admin" %}
+                      <a href="{% url "adminlastmonth" %}" class="btn btn-primary btn-lg btn-block" role="button">Last Month</a>
+                      {% else %}
+                     <a href="{% url "userlastmonth" %}" class="btn btn-primary btn-lg btn-block" role="button">Last Month</a>
+                      {% endif %}
+                    </div>
+
+                    <div class="col-lg-3 col-md-6"> 
+                        
+                    </div>
+
+                    <div class="col-lg-3 col-md-6">
+                        <button type="button" class="btn btn-outline-primary btn-lg btn-block">Total Closure {{closejobcount}}</button>
+                    </div>
                 </div>
-              </div>
-            </div>
+                <!-- /Buttons -->        
+
 
 
 
  
         </div>
-        <!-- /.container-fluid -->
+
+
+
+ 
+        </div>
+
            <div>
   {{ chart_pie1|safe }}
   <script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
@@ -51,14 +57,5 @@
   {{ chart_pie3|safe }}
   <script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
    </div>       
-        <!-- Sticky Footer -->
-        <footer class="sticky-footer">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
-            </div>
-          </div>
-        </footer>
 
-      </div>
 {% endblock content %}      

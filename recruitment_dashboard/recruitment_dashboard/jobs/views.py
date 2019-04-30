@@ -169,6 +169,7 @@ def admin_home(request):
         funnel_row['label'] = item[1]
         funnel_list.append(funnel_row)
     data = json.dumps(funnel_list)
+
     
     
 
