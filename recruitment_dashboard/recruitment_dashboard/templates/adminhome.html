@@ -35,10 +35,7 @@ function calculatePercentage() {
 }
 </script>
 
-     <div id="content-wrapper">
 
-        <div class="container-fluid">
-        
                 <!-- Buttons  -->
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
@@ -72,26 +69,26 @@ function calculatePercentage() {
 
 
  
-        </div>
+
 
 <script type="text/javascript" src="http://kozea.github.com/pygal.js/latest/pygal-tooltips.min.js"></script>
-    <div class="container-fluid">
-            <div class="row" id="port2-second-row">
-                <div class="col-xs-6 imgcont" id="port2-first-col">
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<div class="clearfix"><br/></div>
+            <div class="row">
+                <div class="col-lg-6">
                     {{ chart_pie1|safe }}
                 </div> <!-- end col-sm-6 -->
-                <div class="col-xs-6 imgcont">
-                <div id="chartContainer" style="height: 300px; max-width: 900px; margin: 0px auto;"></div> 
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+                <div class="col-lg-6">
+                    <div id="chartContainer" style="height: 300px; width: 100%;"></div>
                 </div> <!-- end col-sm-6 -->
 
             </div> <!-- end port-second-row -->
 
-              <div class="row" id="port2-second-row">
-                <div class="col-xs-6 imgcont" id="port2-first-col">
+              <div class="row">
+                <div class="col-lg-6">
                     {{ bar_graph1|safe }}
                 </div> <!-- end col-sm-6 -->
-                <div class="col-xs-6 imgcont" id="port2-second-col">
+                <div class="col-lg-6">
                 <div class="table-wrapper-scroll-y my-custom-scrollbar">
   <table id="example1" class="table table-bordered table-striped mb-0" style="width:500px;table-layout:fixed">
     <thead>
@@ -116,13 +113,7 @@ function calculatePercentage() {
                   </div>
                 </div> <!-- end col-sm-6 -->
 
-            </div> <!-- end port-second-row -->
+</div>
 
-        <!-- /.container-fluid -->
-
-
-  
-
-
-      </div>
+ 
 {% endblock content %}      
