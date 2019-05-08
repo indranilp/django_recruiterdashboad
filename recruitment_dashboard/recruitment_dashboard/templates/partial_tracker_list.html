@@ -1,0 +1,24 @@
+{% for b in books %}
+    <tr>
+      <td>{{b.trackerid}}</td>
+      <td>{{b.date}}</td>
+      <td>{{b.jobid}}</td>
+      <td>{{b.jobtitle}}</td>
+      <td>{{b.resumesfound}}</td>
+      <td>{{b.resumecount}}</td>
+      <td>{{b.clientsubmission}}</td>
+      <td>{{b.interviewschedule}}</td>      
+      <td>{{b.remarks}}</td>
+   <td>
+      <button type="button"
+              class="btn btn-warning btn-sm js-update-book"
+              data-url="{% url 'trackerupdate' b.trackerid %}">
+        <span class="glyphicon glyphicon-pencil"></span> Edit
+      </button>
+    </td>
+    </tr>
+{% empty %}
+  <tr>
+    <td colspan="8" class="text-center bg-warning">No Data</td>
+  </tr>
+{% endfor %}

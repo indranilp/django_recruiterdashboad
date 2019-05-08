@@ -43,6 +43,9 @@ urlpatterns = [
     url(r'^scheduleinterview/$', views.schedule_interview, name='scheduleinterview'),
     url(r'^searchresume/$', views.search_resume, name='searchresume'),
     url(r'^openrequirement/$', views.open_requirement, name='openrequirement'),
+    url(r'^createtracker/$', views.create_tracker, name='createtracker'),
+    url(r'^submissiontracker/$', views.submission_tracker, name='submissiontracker'),
+    url(r'^submissiontracker/(?P<trackerid>\d+)$', views.tracker_update, name='trackerupdate'),
     url(r'^openrequirement/(?P<jobid>\d+)$', views.book_update, name='bookupdate'),
     url(r'^searchresume/(?P<candidateemail>\w+|[\w.%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4})/$', views.resume_update, name='resumeupdate'),
     

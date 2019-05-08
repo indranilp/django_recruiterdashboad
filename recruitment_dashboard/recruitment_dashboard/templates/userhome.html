@@ -8,7 +8,7 @@
                 <!-- Buttons  -->
                 <div class="row">
                     <div class="col-lg-3 col-md-6">
-                    {% if currentuser == "admin" %}
+                    {% if currentuser == "admin" or currentuser == "trackeradmin" %}
 
                        <a href="{% url "adminhome" %}" class="btn btn-primary btn-lg btn-block" role="button">Current Month</a>
                     {% else %}
@@ -17,7 +17,7 @@
                     </div>
 
                     <div class="col-lg-3 col-md-6">
-                      {% if currentuser == "admin" %}
+                      {% if currentuser == "admin" or currentuser == "trackeradmin" %}
                       <a href="{% url "adminlastmonth" %}" class="btn btn-primary btn-lg btn-block" role="button">Last Month</a>
                       {% else %}
                      <a href="{% url "userlastmonth" %}" class="btn btn-primary btn-lg btn-block" role="button">Last Month</a>

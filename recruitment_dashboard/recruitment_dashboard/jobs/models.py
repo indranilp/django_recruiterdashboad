@@ -54,5 +54,17 @@ class Interview(models.Model):
     candidateemail = models.ForeignKey(Resume, on_delete=models.CASCADE)
     interviewdate   = models.DateField()
     interviewstatus = models.CharField(max_length=200,null=True,blank=True)
+    
+class Tracker(models.Model):
+    trackerid = models.IntegerField(primary_key=True)
+    date = models.DateField(null=True,blank=True)
+    jobid = models.CharField(max_length=200,null=True,blank=True)
+    jobtitle = models.CharField(max_length=200,null=True,blank=True)
+    resumesfound = models.CharField(max_length=200,null=True,blank=True)
+    resumecount = models.CharField(max_length=200,null=True,blank=True)
+    clientsubmission = models.CharField(max_length=200,null=True,blank=True)
+    interviewschedule = models.CharField(max_length=200,null=True,blank=True)
+    remarks = models.CharField(max_length=2000,null=True,blank=True)
+
 
 

@@ -133,19 +133,22 @@
             <div id="main-menu" class="main-menu collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active">
-                        {% if currentuser == "admin" %}
+                        {% if currentuser == "admin" or currentuser == "trackeradmin" %}
                         <a href="{% url "adminhome" %}"><i class="menu-icon fa fa-laptop"></i>Dashboard</a>
                         {% else %}
                         <a href="{% url "userhome" %}"><i class="menu-icon fa fa-laptop"></i>Dashboard</a>
                         {% endif %}
                     </li>
-                    {% if currentuser == "admin" %}
+                    {% if currentuser == "admin" or currentuser == "trackeradmin" %}
                      <li>
                         <a href="{% url "openrequirement" %}"><i class="menu-icon fa fa-clipboard"></i>Open Requirements</a>
                     </li>
                      <li>
                         <a href="{% url "searchresume" %}"><i class="menu-icon fa fa-database"></i>Resume Database</a>
                     </li>
+                    <li>
+                        <a href="{% url "submissiontracker" %}"><i class="menu-icon fa fa-clipboard"></i>Submission Tracker</a>
+                    </li>                   
                     {% else %}
                      <li>
                         <a href="{% url "uploadresume" %}"><i class="menu-icon fa fa-clipboard"></i>Upload Resume</a>
@@ -192,7 +195,7 @@
 
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle active" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {% if currentuser == "admin" %}                           
+            {% if currentuser == "admin" or currentuser == "trackeradmin"%}                           
                              <img class="user-avatar rounded-circle" src="{% static 'images/admin.jpg' %}" alt="User Avatar"> <h4 style="color: white;padding-left: 10px;"> Admin</h4>                             
             {% else %}
                              <img class="user-avatar rounded-circle" src={{ userobject.picfile.url}} alt="User Avatar"> <h4 style="color: white;padding-left: 10px;">{{ userobject.designation}}</h4>                             
@@ -202,7 +205,7 @@
 
                         <div class="user-menu dropdown-menu">
                                           
-                            {% if currentuser == "admin" %}
+                            {% if currentuser == "admin" or currentuser == "trackeradmin" %}
                             <a class="nav-link" href="{% url "editprofile" %}"><i class="fa fa-user"></i>Edit Profile</a>
 
                             <a class="nav-link" href="{% url "createuser" %}"><i class="fa fa-user-plus"></i>Create user</a>
@@ -491,6 +494,10 @@ $(document).ready(function () {
 
 
 
+  // Create book
+  $(".js-create-book").click(loadForm);
+  $("#modal-book").on("submit", ".js-book-create-form", saveForm);
+
   // Update book
   $("#example").on("click", ".js-update-book", loadForm);
   $("#modal-book").on("submit", ".js-book-update-form", saveForm);
@@ -498,6 +505,10 @@ $(document).ready(function () {
     // Update book
   $("#example").on("click", ".js-update-book", loadForm);
   $("#modal-book-resume").on("submit", ".js-book-update-form", saveForm);
+  
+      // Update book
+  $("#example").on("click", ".js-update-book", loadForm);
+  $("#modal-book-tracker").on("submit", ".js-book-update-form", saveForm);
 
 });
 </script>

@@ -726,6 +726,12 @@ def open_requirement(request):
     currentuser = request.session.get('name1')
     return render_to_response('openrequirement.html', {'currentuser': currentuser, 'userobject':Recruiter.objects.get(username=currentuser),'obj': JobDetails.objects.all().exclude(jobstatus='closed')},
                               context_instance=RequestContext(request))
+            
+@login_required
+def submission_tracker(request):
+    currentuser = request.session.get('name1')
+    return render_to_response('submissiontracker.html', {'currentuser': currentuser, 'userobject':Recruiter.objects.get(username=currentuser),'obj': Tracker.objects.all()},
+                              context_instance=RequestContext(request))
                               
 def save_book_form(request, form, template_name):    
     data = dict()
@@ -743,6 +749,22 @@ def save_book_form(request, form, template_name):
     data['html_form'] = render_to_string(template_name, context, request=request)
     return JsonResponse(data)
 
+def save_tracker_form(request, form, template_name):    
+    data = dict()
+    if request.method == 'POST':
+        if form.is_valid():
+            form.save()
+            data['form_is_valid'] = True
+            books = Tracker.objects.all()
+            data['html_book_list'] = render_to_string('partial_tracker_list.html', {
+                'books': books
+            })
+        else:
+            data['form_is_valid'] = False
+    context = {'form': form}
+    data['html_form'] = render_to_string(template_name, context, request=request)
+    return JsonResponse(data)
+    
 def book_update(request, jobid):
     book = get_object_or_404(JobDetails, pk=jobid)
     if request.method == 'POST':
@@ -751,6 +773,21 @@ def book_update(request, jobid):
         form = JobDetailsForm(instance=book)
     return save_book_form(request, form, 'partial_book_update.html')   
 
+def tracker_update(request, trackerid):
+    book = get_object_or_404(Tracker, pk=trackerid)
+    if request.method == 'POST':
+        form = SubmissionTrackerDetailsForm(request.POST, instance=book)
+    else:
+        form = SubmissionTrackerDetailsForm(instance=book)
+    return save_tracker_form(request, form, 'partial_tracker_update.html')
+    
+def create_tracker(request):
+    if request.method == 'POST':
+        form = SubmissionTrackerDetailsForm(request.POST)
+    else:
+        form = SubmissionTrackerDetailsForm()
+    return save_tracker_form(request, form, 'partial_tracker_create.html')    
+    
 def save_resume_form(request, form, template_name):    
     data = dict()
     if request.method == 'POST':

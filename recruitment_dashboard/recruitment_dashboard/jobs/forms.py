@@ -11,3 +11,9 @@ class ResumeDetailsForm(forms.ModelForm):
     class Meta:
         model = Resume
         fields = ('candidateemail', 'candidatename', 'availability','resumestatus',)        
+        
+
+class SubmissionTrackerDetailsForm(forms.ModelForm):
+    class Meta:
+        model = Tracker
+        fields = ('date','jobid', 'jobtitle','resumesfound', 'resumecount','clientsubmission','interviewschedule','remarks',)
